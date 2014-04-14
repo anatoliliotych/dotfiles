@@ -20,6 +20,12 @@ tap caskroom/versions
 cask install alfred
 cask install iterm2
 cask install vlc
+cask install spotify
+cask install tunnelbear
+cask install sequel-pro
+cask install bettertouchtool
+cask install utorrent
+cask install unrarx
 
 # link alfred
 cask alfred link
