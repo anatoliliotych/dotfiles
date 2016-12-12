@@ -14,15 +14,18 @@ Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'rking/ag.vim'
-Plugin 'tpope/vim-commentary'
+Plugin 'vim-ruby/vim-ruby'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
+runtime macros/matchit.vim
 " VIM settings
-" Change leader to a comma because the backslash is too far away
-" That means all \x commands turn into ,x
+set timeoutlen=250 "new
+set ttimeout
+set ttimeoutlen=10
 syntax on
+set synmaxcol=200
 set encoding=utf-8
 set nowrap       " Don't wrap lines
 set ignorecase
@@ -47,9 +50,6 @@ set tabstop=2 " tab to two spaces
 set foldmethod=indent   " fold based on indent
 set foldnestmax=3       " deepest fold is 3 levels
 set nofoldenable        " dont fold by default
-set wildmode=list:longest
-set wildmenu                " Enable ctrl-n and ctrl-p to scroll thru matches
-
 set autoindent
 set smartindent
 set smarttab
@@ -80,12 +80,15 @@ let NERDTreeDirArrows  = 0   " No arrows, just | + and ~
 " CtrlP config:
 nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
-nmap <leader>P :CtrlP %:h<CR>
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " use CtrlP for listing files
 let g:ctrlp_use_caching = 0 " ag is fast enough, don't cache
 let g:ctrlp_match_window = 'max:15'
-let g:ctrlp_open_new_file = 'h' " open new file in a horizontal split
+let g:ctrlp_open_new_file = 'v' " open new file in a horizontal split
 
 " Syntastic config:
-let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_open=1
+
+set cursorline
+set rnu
+set nocp
