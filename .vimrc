@@ -1,91 +1,59 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set nocompatible " be iMproved, required by Vundle too
+filetype off                  " required by Vundle
+set rtp+=~/.vim/bundle/Vundle.vim " set the runtime path to include Vundle
 call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'jpo/vim-railscasts-theme'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'rking/ag.vim'
-Plugin 'tpope/vim-commentary'
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" VIM settings
-" Change leader to a comma because the backslash is too far away
-" That means all \x commands turn into ,x
+Plugin 'gmarik/Vundle.vim'        " plugin manager
+Plugin 'tpope/vim-fugitive'       " git integration
+Plugin 'jpo/vim-railscasts-theme' " railscasts theme
+Plugin 'airblade/vim-gitgutter'   " shows git diff changes to the left
+Plugin 'bling/vim-airline'        " nice status line
+Plugin 'rking/ag.vim'             " nice search
+call vundle#end()            " required by Vundle
+filetype plugin indent on    " required by Vundle
+runtime macros/matchit.vim " smart way to show matching closing element pressing % on { shows } and so on
+" VIM Settings
 syntax on
-set encoding=utf-8
-set nowrap       " Don't wrap lines
-set ignorecase
-set fileformats+=mac
-set list
-set listchars=tab:▸\ ,eol:¬,trail:∙
-set linebreak " wrap lines at convenient points
-set nowritebackup
-set autoread
-set noswapfile
-set nobackup
-set showbreak=⇢\  " show wrapped lines
-set laststatus=2 " always show status line
-set ruler " show the cursor position all the time
-set guioptions-=RLTrlt
 colorscheme railscasts
-set guifont=Meslo\ LG\ S\ for\ Powerline:h17
-execute 'set colorcolumn=' . join(range(81,335), ',')
 highlight default link SignColumn LineNr
-
-set tabstop=2 " tab to two spaces
-set foldmethod=indent   " fold based on indent
-set foldnestmax=3       " deepest fold is 3 levels
-set nofoldenable        " dont fold by default
-set wildmode=list:longest
-set wildmenu                " Enable ctrl-n and ctrl-p to scroll thru matches
-
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-" Automatic formatting:
-autocmd BufWritePre *.rb :%s/\s\+$//e
-autocmd BufWritePre *.js :%s/\s\+$//e
-autocmd BufWritePre *.haml :%s/\s\+$//e
-autocmd BufWritePre *.html :%s/\s\+$//e
-autocmd BufWritePre *.scss :%s/\s\+$//e
-autocmd BufNewFile * set noeol
-
-" Airline config:
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#hunks#enabled=0
-
-" NERDTree config:
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>c :NERDTree %<CR>
-let NERDTreeMinimalUI  = 1
-let NERDTreeShowHidden = 1
-let g:NERDTreeWinSize  = 30  " Window size
-let NERDTreeDirArrows  = 0   " No arrows, just | + and ~
-
-" CtrlP config:
-nmap <leader>p :CtrlP<CR>
-nmap <leader>b :CtrlPBuffer<CR>
-nmap <leader>P :CtrlP %:h<CR>
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " use CtrlP for listing files
-let g:ctrlp_use_caching = 0 " ag is fast enough, don't cache
-let g:ctrlp_match_window = 'max:15'
-let g:ctrlp_open_new_file = 'h' " open new file in a horizontal split
-
-" Syntastic config:
-let g:syntastic_check_on_open=1
+set encoding=utf-8
+set timeoutlen=250                                             " used for mapping delays
+set fileformats+=mac                                           " uses special chars for OSX
+set cursorline                                                 " shows cursorline
+set relativenumber                                             " shows relative numbers
+set number                                                     " shows current line with relative numbers
+set path+=**                                                   " allows find to look deep into folders during search
+set wildmenu                                                   " lets you see what your other options for <TAB>
+set hidden                                                     " allows to manage multiple buffers effectively
+set hlsearch                                                   " highlights search items
+set incsearch                                                  " highligths search items dynamically as they are typed
+set ignorecase                                                 " the case of normal letters is ignored
+set smartcase                                                  " overrides ignorecase if search contains uppercase chars
+set nowrap                                                     " don't wrap lines
+set tabstop=2                                                  " tab to two spaces
+set shiftwidth=2                                               " identation in normal mode pressing < or >
+set softtabstop=2                                              " set 'tab' as 2 spaces and removes 2 spaces on backspace
+set expandtab                                                  " replaces tabs with spaces
+set smarttab                                                   " needed for tabbing
+set nofoldenable                                               " don't fold by default
+set ruler                                                      " shows the cursor position
+set laststatus=2                                               " shows status line
+set synmaxcol=200                                              " maximum column in which to search for syntax items.  In long lines the
+set autoindent                                                 " copy indent from current line when starting a new line
+set smartindent                                                " does smart autoindenting
+set nowritebackup                                              " to not write backup before save
+set autoread                                                   " to autoread if file was changed outside from vim
+set noswapfile                                                 " to not use swap files
+set nobackup                                                   " to not write backup during overwriting file
+set showcmd                                                    " shows command
+set list                                                       " enables showing of hidden chars
+set listchars=tab:▸\ ,eol:¬,trail:∙                            " shows hidden end of line. tabs and  trailing spaces
+set foldmethod=syntax                                          " fold based on syntax
+set foldnestmax=3                                              " deepest fold is 3 levels
+" autoformating
+au BufWritePre *.rb, *.js, *.haml, *.html, *.scss :%s/\s\+$//e " removes trailing spaces
+au BufNewFile * set noeol                                      " removes eol
+au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+',-1) " highlights more than 80 symbols
+" netrw settings
+let g:netrw_banner = 0       " removes banner
+let g:netrw_browse_split = 2 " opens file in vsplit
+let g:netrw_winsize = 40     " netrw winsize
