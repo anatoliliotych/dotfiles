@@ -50,7 +50,7 @@ set listchars=tab:▸\ ,eol:¬,trail:∙                            " shows hidd
 set foldmethod=syntax                                          " fold based on syntax
 set foldnestmax=3                                              " deepest fold is 3 levels
 " autoformating
-au BufWritePre *.rb, *.js, *.haml, *.html, *.scss :%s/\s\+$//e " removes trailing spaces
+au BufWritePre * %s/\s\+$//e " removes trailing spaces
 au BufNewFile * set noeol                                      " removes eol
 au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+',-1) " highlights more than 80 symbols
 " netrw settings
