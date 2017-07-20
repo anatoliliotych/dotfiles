@@ -49,6 +49,7 @@ set list                                                       " enables showing
 set listchars=tab:▸\ ,eol:¬,trail:∙                            " shows hidden end of line. tabs and  trailing spaces
 set foldmethod=syntax                                          " fold based on syntax
 set foldnestmax=3                                              " deepest fold is 3 levels
+set clipboard=unnamed                                          " copying from/to clipboard
 " autoformating
 au BufWritePre * %s/\s\+$//e " removes trailing spaces
 au BufNewFile * set noeol                                      " removes eol
