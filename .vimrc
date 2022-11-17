@@ -39,7 +39,7 @@ set smarttab                                                   " needed for tabb
 set nofoldenable                                               " don't fold by default
 set ruler                                                      " shows the cursor position
 set laststatus=2                                               " shows status line
-set synmaxcol=200                                              " maximum column in which to search for syntax items.  In long lines the
+set synmaxcol=200                                              " maximum column in which to search for syntax items.
 set autoindent                                                 " copy indent from current line when starting a new line
 set smartindent                                                " does smart autoindenting
 set nowritebackup                                              " to not write backup before save
@@ -63,12 +63,17 @@ au BufNewFile,BufRead *.slim setf slim
 let g:netrw_banner = 0       " removes banner
 let g:netrw_browse_split = 2 " opens file in vsplit
 let g:netrw_winsize = 40     " netrw winsize
-" ag settings
-let g:ag_working_path_mode="r"
-imap jj <Esc>
 
-let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.95 } }
+imap jj <Esc>
+"
+" fzf settings
+let g:fzf_layout = { 'window': { 'width': 0.99, 'height': 0.99 } }
 let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_modules,vendor}/*"'
-command! -bang -nargs=? -complete=dir Files
-     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+let $BAT_STYLE = 'header,numbers,grid'
+
+command! -bang -nargs=* -complete=dir Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --with-filename --no-heading --color=always --smart-case '
+  \   .shellescape(<q-args>), 1, fzf#vim#with_preview({'options': ['--preview-window', '+{2}-5,~3']},
+  \                                                   'right:75%', 'ctrl-/'), <bang>0)
