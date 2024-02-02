@@ -55,6 +55,7 @@ set clipboard=unnamed                                          " copying from/to
 let g:tex_fast= ""
 " autoformating
 set nocursorline
+au FileType * setlocal formatoptions-=cro
 au BufWritePre * %s/\s\+$//e " removes trailing spaces
 au BufNewFile * set noeol                                      " removes eol
 au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+',-1) " highlights more than 80 symbols
