@@ -66,6 +66,9 @@ let g:netrw_browse_split = 2 " opens file in vsplit
 let g:netrw_winsize = 40     " netrw winsize
 
 imap jj <Plug>(copilot-next)
+imap kk <Plug>(copilot-accept-word)
+imap ll <Plug>(copilot-accept-line)
+
 "
 " fzf settings
 let g:fzf_layout = { 'window': { 'width': 0.99, 'height': 0.99 } }
