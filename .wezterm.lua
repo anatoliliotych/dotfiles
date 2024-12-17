@@ -15,6 +15,7 @@ config.scrollback_lines = 50000
 
 config.keys = {
 { key = 'k', mods = 'CMD', action = act.ClearScrollback 'ScrollbackAndViewport', },
+{ key = '/', mods = 'CTRL', action=wezterm.action.SendString("\x1f") },
 }
 
 
