@@ -8,7 +8,7 @@ Plugin 'airblade/vim-gitgutter'   " shows git diff changes to the left
 Plugin 'bling/vim-airline'        " nice status line
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
-Plugin 'github/copilot.vim'
+Plugin 'gergap/vim-ollama'
 Plugin 'sonph/onehalf', { 'rtp': 'vim' }
 call vundle#end()            " required by Vundle
 
@@ -66,9 +66,8 @@ let g:netrw_banner = 0       " removes banner
 let g:netrw_browse_split = 2 " opens file in vsplit
 let g:netrw_winsize = 40     " netrw winsize
 
-imap jj <Plug>(copilot-next)
-imap kk <Plug>(copilot-accept-word)
-imap :: <Plug>(copilot-accept-line)
+let g:ollama_chat_model = 'qwen2.5-coder:7b'
+let g:ollama_model = 'qwen2.5-coder:7b'
 "
 " fzf settings
 let g:fzf_layout = { 'window': { 'width': 0.99, 'height': 0.99 } }
