@@ -10,12 +10,13 @@
     fzf
     ripgrep
     autojump
-    vim_configurable
     git
+    vim
     htop
     zsh
     zsh-fzf-tab
     direnv
+    llama-cpp
     (python312.withPackages (ps: with ps; [ httpx requests ]))
   ];
 
@@ -67,6 +68,9 @@
       plugins = [ "git" "vi-mode" "autojump" ];
       theme = "onehalfdark";
       custom = "$HOME/.oh-my-zsh";
+    };
+    shellAliases = {
+      copilot="llama-server -m /Users/al/models/Qwen_2.5_Coder_3B.gguf --port 8012 -ngl 99 -fa -ub 1024 -b 1024 --ctx-size 0 --cache-reuse 256 --log-disable";
     };
   };
 
@@ -123,6 +127,7 @@
   home.file.".vimrc".text = ''
   set nocompatible " be iMproved, required by Vundle too
   filetype off                  " required by Vundle
+  let g:llama_config = { 'show_info': 0 }
   set rtp+=~/.vim/bundle/Vundle.vim " set the runtime path to include Vundle
   call vundle#begin()
   Plugin 'gmarik/Vundle.vim'        " plugin manager
@@ -131,7 +136,7 @@
   Plugin 'bling/vim-airline'        " nice status line
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plugin 'junegunn/fzf.vim'
-  Plugin 'gergap/vim-ollama'
+  Plugin 'ggml-org/llama.vim'
   Plugin 'sonph/onehalf', { 'rtp': 'vim' }
   call vundle#end()            " required by Vundle
 
