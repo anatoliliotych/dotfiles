@@ -6,18 +6,18 @@
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
-    bat
-    fzf
-    ripgrep
     autojump
-    git
-    vim
-    htop
-    zsh
-    zsh-fzf-tab
+    bat
     direnv
+    fzf
+    git
+    htop
     llama-cpp
     (python312.withPackages (ps: with ps; [ httpx requests ]))
+    ripgrep
+    vim
+    zsh
+    zsh-fzf-tab
   ];
 
   home.file = {
@@ -56,6 +56,9 @@
         export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --border --margin=1,4'
       fi
       eval "$(direnv hook zsh)"
+      remind() {
+        osascript -e "tell application \"Reminders\" to make new reminder in list \"Backlog\" with properties {name:\"$*\"}"
+      }
 
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
@@ -194,8 +197,6 @@
   let g:netrw_browse_split = 2 " opens file in vsplit
   let g:netrw_winsize = 40     " netrw winsize
 
-  let g:ollama_chat_model = 'qwen2.5-coder:7b'
-  let g:ollama_model = 'qwen2.5-coder:7b'
   "
   " fzf settings
   let g:fzf_layout = { 'window': { 'width': 0.99, 'height': 0.99 } }
