@@ -1,16 +1,14 @@
 set nocompatible " be iMproved, required by Vundle too
 filetype off                  " required by Vundle
-set rtp+=~/.vim/bundle/Vundle.vim " set the runtime path to include Vundle
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'        " plugin manager
-Plugin 'tpope/vim-fugitive'       " git integration
-Plugin 'airblade/vim-gitgutter'   " shows git diff changes to the left
-Plugin 'bling/vim-airline'        " nice status line
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-Plugin 'gergap/vim-ollama'
-Plugin 'sonph/onehalf', { 'rtp': 'vim' }
-call vundle#end()            " required by Vundle
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'       " git integration
+Plug 'airblade/vim-gitgutter'   " shows git diff changes to the left
+Plug 'bling/vim-airline'        " nice status line
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'ggml-org/llama.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+call plug#end()
 
 filetype plugin indent on    " required by Vundle
 runtime macros/matchit.vim " smart way to show matching closing element pressing % on { shows } and so on
@@ -51,7 +49,7 @@ set showcmd                                                    " shows command
 set list                                                       " enables showing of hidden chars
 set listchars=tab:▸\ ,eol:¬,trail:∙                            " shows hidden end of line. tabs and  trailing spaces
 set foldmethod=indent                                          " fold based on syntax
-set clipboard=unnamed                                          " copying from/to clipboard
+set clipboard+=unnamedplus,unnamed                             " copying from/to clipboard
 let g:tex_fast= ""
 " autoformating
 set nocursorline
@@ -66,9 +64,6 @@ let g:netrw_banner = 0       " removes banner
 let g:netrw_browse_split = 2 " opens file in vsplit
 let g:netrw_winsize = 40     " netrw winsize
 
-let g:ollama_chat_model = 'qwen2.5-coder:7b'
-let g:ollama_model = 'qwen2.5-coder:7b'
-"
 " fzf settings
 let g:fzf_layout = { 'window': { 'width': 0.99, 'height': 0.99 } }
 let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
