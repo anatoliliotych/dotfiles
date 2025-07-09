@@ -15,34 +15,33 @@
   home.packages = with pkgs; [
     autojump
     bat
+    claude-code
     curl
     direnv
     fzf
     git
     htop
     llama-cpp
-    claude-code
+    neovim
     ripgrep
     (python312.withPackages (ps: with ps; [ httpx requests ]))
-    vim-full
-    wl-clipboard
     zsh
     zsh-fzf-tab
   ];
 
-  home.activation.installVimPlug = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.installNeoVimVimPlug = lib.hm.dag.entryAfter ["writeBoundary"] ''
     export PATH=$PATH:${pkgs.git}/bin:${pkgs.curl}/bin
-    mkdir -p "$HOME/.vim/autoload"
-    mkdir -p "$HOME/.vim/plugged"
+    mkdir -p "$HOME/.config/nvim/autoload"
+    mkdir -p "$HOME/.config/nvim/plugged"
 
-    if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
+    if [ ! -f "$HOME/.config/nvim/autoload/plug.vim" ]; then
       echo "Installing vim-plug..."
-      ${pkgs.curl}/bin/curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+      ${pkgs.curl}/bin/curl -fLo "$HOME/.config/nvim/autoload/plug.vim" --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 
     echo "Installing/updating vim plugins..."
-    ${pkgs.vim-full}/bin/vim +PlugInstall +PlugUpdate +qall
+    ${pkgs.neovim}/bin/nvim -u ~/.config/nvim/setup.lua --headless +PlugInstall +PlugUpdate +qall
   '';
 
   programs.home-manager.enable = true;
@@ -88,6 +87,7 @@
     };
     shellAliases = {
       copilot="llama-server -m /Users/al/models/Qwen_2.5_Coder_3B.gguf --port 8012 -ngl 99 -fa -ub 1024 -b 1024 --ctx-size 0 --cache-reuse 256 --log-disable";
+      vim="nvim";
     };
   };
 
@@ -109,5 +109,9 @@
   };
 
   home.file.".oh-my-zsh/themes/onehalfdark.zsh-theme".source = ~/dotfiles/onehalfdark.zsh-theme;
-  home.file.".vimrc".source = ~/dotfiles/.vimrc;
+  home.file.".config/nvim/init.lua".source = ~/dotfiles/nvim/init.lua;
+  home.file.".config/nvim/setup.lua".source = ~/dotfiles/nvim/setup.lua;
+  home.file.".config/nvim/lua/autocmd.lua".source = ~/dotfiles/nvim/lua/autocmd.lua;
+  home.file.".config/nvim/lua/settings.lua".source = ~/dotfiles/nvim/lua/settings.lua;
+  home.file.".config/nvim/lua/plugins.lua".source = ~/dotfiles/nvim/lua/plugins.lua;
 }
