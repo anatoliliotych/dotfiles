@@ -83,8 +83,9 @@
       enable = true;
       plugins = [ "git" "vi-mode" "autojump" ];
       theme = "onehalfdark";
-      custom = "$HOME/.oh-my-zsh";
+      custom = "$HOME/.config/oh-my-zsh";
     };
+
     shellAliases = {
       copilot="llama-server -m /Users/al/models/Qwen_2.5_Coder_3B.gguf --port 8012 -ngl 99 -fa -ub 1024 -b 1024 --ctx-size 0 --cache-reuse 256 --log-disable";
       vim="nvim";
@@ -108,7 +109,7 @@
     EDITOR = "vim";
   };
 
-  home.file.".oh-my-zsh/themes/onehalfdark.zsh-theme".source = ~/dotfiles/onehalfdark.zsh-theme;
+  home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source = ~/dotfiles/onehalfdark.zsh-theme;
   home.file.".config/nvim/init.lua".source = ~/dotfiles/nvim/init.lua;
   home.file.".config/nvim/setup.lua".source = ~/dotfiles/nvim/setup.lua;
   home.file.".config/nvim/lua/autocmd.lua".source = ~/dotfiles/nvim/lua/autocmd.lua;
