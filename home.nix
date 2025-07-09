@@ -114,4 +114,5 @@
   home.file.".config/nvim/lua/autocmd.lua".source = ~/dotfiles/nvim/lua/autocmd.lua;
   home.file.".config/nvim/lua/settings.lua".source = ~/dotfiles/nvim/lua/settings.lua;
   home.file.".config/nvim/lua/plugins.lua".source = ~/dotfiles/nvim/lua/plugins.lua;
+  home.file.".wezterm.lua".source = ~/dotfiles/.wezterm.lua;
 }
