@@ -25,6 +25,7 @@
     neovim
     ripgrep
     (python312.withPackages (ps: with ps; [ httpx requests ]))
+    tmux
     zsh
     zsh-fzf-tab
   ];
@@ -112,4 +113,5 @@
   home.file.".config/nvim/lua/settings.lua".source = ~/dotfiles/nvim/lua/settings.lua;
   home.file.".config/nvim/lua/plugins.lua".source = ~/dotfiles/nvim/lua/plugins.lua;
   home.file.".wezterm.lua".source = ~/dotfiles/.wezterm.lua;
+  home.file.".tmux.conf".source = ~/dotfiles/.tmux.conf;
 }
