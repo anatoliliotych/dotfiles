@@ -6,11 +6,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ggml-org/llama.vim'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-treesitter/nvim-treesitter'
-
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug('sonph/onehalf', { rtp = 'vim' })
 
 vim.call('plug#end')
 
+require("ibl").setup()
 require("fzf-lua").setup {
   winopts = {
     fullscreen = true,
