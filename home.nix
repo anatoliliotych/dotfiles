@@ -64,10 +64,6 @@
 
   programs.zsh = {
     initContent = ''
-      if command -v rg &> /dev/null; then
-        export FZF_DEFAULT_COMMAND='rg --files'
-        export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --border --margin=1,4'
-      fi
       eval "$(direnv hook zsh)"
       remind() {
         osascript -e "tell application \"Reminders\" to make new reminder in list \"Backlog\" with properties {name:\"$*\"}"
