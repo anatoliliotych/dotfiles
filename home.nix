@@ -81,7 +81,7 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "vi-mode" "autojump" ];
+      plugins = [ "git" "vi-mode" "autojump"];
       theme = "onehalfdark";
       custom = "$HOME/.config/oh-my-zsh";
     };
