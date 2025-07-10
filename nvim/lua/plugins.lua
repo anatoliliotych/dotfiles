@@ -5,6 +5,7 @@ Plug 'bling/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'ggml-org/llama.vim'
 Plug 'ibhagwan/fzf-lua'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug('sonph/onehalf', { rtp = 'vim' })
 
@@ -28,3 +29,28 @@ end, { desc = "FzfLua Files" })
 vim.keymap.set("n", "<leader>fg", function()
   require("fzf-lua").live_grep()
 end, { desc = "FzfLua Files" })
+
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    "bash",
+    "html",
+    "slim",
+    "css",
+    "lua",
+    "dockerfile",
+    "vim",
+    "vimdoc",
+    "query",
+    "markdown",
+    "markdown_inline",
+    "json",
+    "javascript",
+    "yaml",
+    "ruby",
+  },
+
+  auto_install = true,
+
+  highlight = { enable = true },
+  indent = { enabled = true },
+}
