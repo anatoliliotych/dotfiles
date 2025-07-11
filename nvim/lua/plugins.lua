@@ -11,7 +11,12 @@ Plug('sonph/onehalf', { rtp = 'vim' })
 
 vim.call('plug#end')
 
-require("ibl").setup()
+require("ibl").setup({
+    scope = {
+        enabled = false,
+    },
+})
+
 require("fzf-lua").setup {
   winopts = {
     fullscreen = true,
