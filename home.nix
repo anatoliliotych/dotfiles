@@ -103,7 +103,7 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source = ~/dotfiles/onehalfdark.zsh-theme;
