@@ -10,7 +10,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug('sonph/onehalf', { rtp = 'vim' })
 
 vim.call('plug#end')
-
 require("ibl").setup({
     scope = {
         enabled = false,
