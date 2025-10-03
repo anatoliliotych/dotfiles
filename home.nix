@@ -86,7 +86,7 @@
     };
 
     shellAliases = {
-      copilot="llama-server -m /Users/al/models/Qwen_2.5_Coder_3B.gguf --port 8012 -ngl 99 -fa -ub 1024 -b 1024 --ctx-size 0 --cache-reuse 256 --log-disable";
+      copilot="llama-server --fim-qwen-3b-default";
       vim="nvim";
     };
   };
