@@ -4,7 +4,29 @@ local g = vim.g
 -- Basic editor setup
 vim.cmd('colorscheme onehalfdark')
 vim.cmd([[highlight default link SignColumn LineNr]])
-o.timeoutlen = 250
+-- Load colorscheme first
+vim.cmd.colorscheme("onehalfdark")
+
+-- Function to apply WhichKey highlights
+local function set_whichkey_highlights()
+  vim.cmd [[
+    highlight WhichKeyNormal guibg=#353b45 guifg=#dcdfe4
+    highlight WhichKeyFloat  guibg=#353b45 guifg=#dcdfe4
+    highlight WhichKeyBorder guibg=#353b45 guifg=#61afef
+  ]]
+end
+
+-- Apply immediately
+set_whichkey_highlights()
+
+-- Apply automatically if colorscheme changes later
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = set_whichkey_highlights,
+})
+
+
+o.timeoutlen = 500
 
 -- Line numbers and display
 o.relativenumber = true

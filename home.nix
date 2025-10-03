@@ -3,7 +3,7 @@
 {
   home.username = "al";
   home.homeDirectory = "/Users/al";
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   nixpkgs = {
     config = {
@@ -13,6 +13,7 @@
   };
 
   home.packages = with pkgs; [
+    aerospace
     autojump
     bat
     claude-code
@@ -65,6 +66,7 @@
 
   programs.zsh = {
     initContent = ''
+      export PATH="$PATH:/Applications/AeroSpace.app/Contents/MacOS"
       eval "$(direnv hook zsh)"
       remind() {
         osascript -e "tell application \"Reminders\" to make new reminder in list \"Backlog\" with properties {name:\"$*\"}"
@@ -114,4 +116,5 @@
   home.file.".config/nvim/lua/plugins.lua".source = ~/dotfiles/nvim/lua/plugins.lua;
   home.file.".wezterm.lua".source = ~/dotfiles/.wezterm.lua;
   home.file.".tmux.conf".source = ~/dotfiles/.tmux.conf;
+  home.file.".aerospace.toml".source = ~/dotfiles/.aerospace.toml;
 }
