@@ -109,12 +109,8 @@
   };
 
   home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source = ~/dotfiles/onehalfdark.zsh-theme;
-  home.file.".config/nvim/init.lua".source = ~/dotfiles/nvim/init.lua;
-  home.file.".config/nvim/setup.lua".source = ~/dotfiles/nvim/setup.lua;
-  home.file.".config/nvim/lua/autocmd.lua".source = ~/dotfiles/nvim/lua/autocmd.lua;
-  home.file.".config/nvim/lua/settings.lua".source = ~/dotfiles/nvim/lua/settings.lua;
-  home.file.".config/nvim/lua/plugins.lua".source = ~/dotfiles/nvim/lua/plugins.lua;
-  home.file.".wezterm.lua".source = ~/dotfiles/.wezterm.lua;
+  home.file.".config/nvim".source = ~/dotfiles/nvim;
+  home.file.".config/nvim".recursive = true;
   home.file.".tmux.conf".source = ~/dotfiles/.tmux.conf;
   home.file.".aerospace.toml".source = ~/dotfiles/.aerospace.toml;
 }

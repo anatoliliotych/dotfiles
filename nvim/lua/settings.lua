@@ -4,8 +4,6 @@ local g = vim.g
 -- Basic editor setup
 vim.cmd('colorscheme onehalfdark')
 vim.cmd([[highlight default link SignColumn LineNr]])
--- Load colorscheme first
-vim.cmd.colorscheme("onehalfdark")
 
 -- Function to apply WhichKey highlights
 local function set_whichkey_highlights()
@@ -24,7 +22,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   callback = set_whichkey_highlights,
 })
-
 
 o.timeoutlen = 500
 
