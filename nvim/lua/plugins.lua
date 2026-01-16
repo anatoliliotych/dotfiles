@@ -43,28 +43,3 @@ require("which-key").setup({
   },
   delay = 500
 })
-
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "bash",
-    "html",
-    "slim",
-    "css",
-    "lua",
-    "dockerfile",
-    "vim",
-    "vimdoc",
-    "query",
-    "markdown",
-    "markdown_inline",
-    "json",
-    "javascript",
-    "yaml",
-    "ruby",
-  },
-
-  auto_install = true,
-
-  highlight = { enable = true },
-  indent = { enabled = true },
-}

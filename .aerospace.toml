@@ -1,6 +1,7 @@
 after-startup-command = [
   'exec-and-forget open -a "Zen"',
-  'exec-and-forget open -a "Ghostty"',
+  'exec-and-forget open -a "Safari"',
+  'exec-and-forget open -a "WezTerm"',
   'exec-and-forget open -a "Mail"',
   'exec-and-forget open -a "Calendar"',
   'exec-and-forget open -a "Reminders"',
@@ -92,7 +93,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-3 = 'workspace 3'
     alt-4 = 'workspace 4'
     alt-5 = 'workspace 5'
-    alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
+    alt-b = 'workspace B'
     alt-c = 'workspace C'
     alt-m = 'workspace M'
     alt-o = 'workspace O'
@@ -104,7 +105,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
-    alt-shift-a = 'move-node-to-workspace A'
+    alt-shift-b = 'move-node-to-workspace B'
     alt-shift-c = 'move-node-to-workspace C'
     alt-shift-m = 'move-node-to-workspace M'
     alt-shift-o = 'move-node-to-workspace O'
@@ -139,11 +140,8 @@ automatically-unhide-macos-hidden-apps = false
   run = 'move-node-to-workspace M'
   check-further-callbacks = false
 [[on-window-detected]]
-  if.app-id = 'com.mitchellh.ghostty'
-  run = [
-    'layout floating',
-    'move-node-to-workspace T'
-  ]
+  if.app-id = 'com.github.wez.wezterm'
+  run = 'move-node-to-workspace T'
   check-further-callbacks = false
 [[on-window-detected]]
   if.app-id = 'com.apple.finder'

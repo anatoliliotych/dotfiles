@@ -43,10 +43,13 @@
     fi
 
     echo "Installing/updating vim plugins..."
-    ${pkgs.neovim}/bin/nvim -u ~/.config/nvim/setup.lua --headless +PlugInstall +PlugUpdate +qall
+    ${pkgs.neovim}/bin/nvim -u ~/.config/nvim/init.lua --headless +PlugInstall +PlugUpdate +TSUpdate +qall
   '';
 
-  programs.home-manager.enable = true;
+  programs.home-manager = {
+    enable = true;
+  };
+
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
@@ -66,12 +69,7 @@
 
   programs.zsh = {
     initContent = ''
-      export PATH="$PATH:/Applications/AeroSpace.app/Contents/MacOS"
       eval "$(direnv hook zsh)"
-      remind() {
-        osascript -e "tell application \"Reminders\" to make new reminder in list \"Backlog\" with properties {name:\"$*\"}"
-      }
-
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
     enable = true;
@@ -100,8 +98,12 @@
 
   programs.git = {
     enable = true;
-    userName = "Anatoli Liotych";
-    userEmail = "anatoli.liotych@gmail.com";
+    settings = {
+      user = {
+        name = "Anatoli Liotych";
+        email = "anatoli.liotych@gmail.com";
+      };
+    };
   };
 
   home.sessionVariables = {
@@ -113,4 +115,5 @@
   home.file.".config/nvim".recursive = true;
   home.file.".tmux.conf".source = ~/dotfiles/.tmux.conf;
   home.file.".aerospace.toml".source = ~/dotfiles/.aerospace.toml;
+  home.file.".wezterm.lua".source = ~/dotfiles/.wezterm.lua;
 }
