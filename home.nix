@@ -16,7 +16,7 @@
     aerospace
     autojump
     bat
-    claude-code
+    opencode
     curl
     direnv
     fzf
