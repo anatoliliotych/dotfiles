@@ -17,7 +17,8 @@ config.keys = {
   { key = '/', mods = 'CTRL', action=act.SendString("\x1f") },
   { key = 'd', mods = 'CMD|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' }, },
   { key = 'd', mods = 'CMD', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }, },
-  { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = false }, }
+  { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = false }, },
+  { key = '8', mods = 'CTRL', action = act.PaneSelect },
 }
 
 return config

@@ -16,7 +16,9 @@
     aerospace
     autojump
     bat
+    eza
     opencode
+    nodejs
     curl
     direnv
     fzf
@@ -86,6 +88,7 @@
     shellAliases = {
       copilot="llama-server --fim-qwen-3b-default";
       vim="nvim";
+      ls="eza --icons --grid  --group-directories-first";
     };
   };
 
