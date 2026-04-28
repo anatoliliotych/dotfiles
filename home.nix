@@ -3,7 +3,7 @@
 {
   home.username = "al";
   home.homeDirectory = "/Users/al";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   nixpkgs = {
     config = {
@@ -17,16 +17,16 @@
     autojump
     bat
     eza
+    git
+    fzf
     opencode
     nodejs
     curl
-    direnv
-    fzf
-    git
     htop
     llama-cpp
     neovim
     ripgrep
+    pi-coding-agent
     (python312.withPackages (ps: with ps; [ httpx requests ]))
     tmux
     zsh
@@ -54,7 +54,10 @@
 
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://cache.nixos.org/" ];
+    };
   };
 
   programs.fzf = {
@@ -67,6 +70,9 @@
 
   programs.direnv = {
     enable = true;
+    package = pkgs.direnv.overrideAttrs (oldAttrs: {
+      doCheck = false;
+    });
   };
 
   programs.zsh = {
@@ -82,7 +88,7 @@
       enable = true;
       plugins = [ "git" "vi-mode" "autojump"];
       theme = "onehalfdark";
-      custom = "$HOME/.config/oh-my-zsh";
+      custom = "${config.home.homeDirectory}/.config/oh-my-zsh";
     };
 
     shellAliases = {
