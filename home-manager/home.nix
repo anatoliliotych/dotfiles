@@ -88,9 +88,6 @@ in
 
   programs.direnv = {
     enable = true;
-    package = pkgs.direnv.overrideAttrs (oldAttrs: {
-      doCheck = false;
-    });
   };
 
   programs.zsh = {
