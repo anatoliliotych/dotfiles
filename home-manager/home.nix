@@ -2,25 +2,6 @@
 
 let
   opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix {};
-
-  # vim-plug plugins provided by nix instead of git clones. vim-plug sees the
-  # dirs in plugged/ and skips cloning, so the Plug lines in dotfiles/nvim stay
-  # untouched. Versions follow the nixpkgs pin: update via `nix flake update`
-  # + switch. Treesitter parsers install on demand via auto_install in the
-  # nvim config; switches stay offline.
-  nvimPlugged = pkgs.runCommand "nvim-plugged" { } ''
-    mkdir -p $out/onehalf
-    ln -s ${pkgs.vimPlugins.vim-airline} $out/vim-airline
-    ln -s ${pkgs.vimPlugins.vim-gitgutter} $out/vim-gitgutter
-    ln -s ${pkgs.vimPlugins.llama-vim} $out/llama.vim
-    ln -s ${pkgs.vimPlugins.fzf-lua} $out/fzf-lua
-    ln -s ${pkgs.vimPlugins.nvim-treesitter} $out/nvim-treesitter
-    ln -s ${pkgs.vimPlugins.indent-blankline-nvim} $out/indent-blankline.nvim
-    ln -s ${pkgs.vimPlugins.which-key-nvim} $out/which-key.nvim
-    ln -s ${pkgs.vimPlugins.vim-fugitive} $out/vim-fugitive
-    # nixpkgs flattens the repo; wrap in vim/ to match `rtp = 'vim'`.
-    ln -s ${pkgs.vimPlugins.onehalf} $out/onehalf/vim
-  '';
 in
 {
   home.username = "al";
@@ -45,7 +26,6 @@ in
     htop
     llm-agents.claude-code
     llama-cpp
-    neovim
     ripgrep
     (python313.withPackages (ps: with ps; [ httpx requests ]))
     tmux
@@ -139,11 +119,6 @@ in
   };
 
   home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source = "${dotfiles}/onehalfdark.zsh-theme";
-  home.file.".config/nvim".source = "${dotfiles}/nvim";
-  home.file.".config/nvim".recursive = true;
-  home.file.".config/nvim/plugged".source = nvimPlugged;
-  # vim-plug itself from nixpkgs - no curl bootstrap needed.
-  home.file.".config/nvim/autoload/plug.vim".source = "${pkgs.vimPlugins.vim-plug}/plug.vim";
   home.file.".tmux.conf".source = "${dotfiles}/.tmux.conf";
   home.file.".aerospace.toml".source = "${dotfiles}/.aerospace.toml";
   home.file.".wezterm.lua".source = "${dotfiles}/.wezterm.lua";
