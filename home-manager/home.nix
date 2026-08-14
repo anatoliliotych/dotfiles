@@ -11,7 +11,6 @@ in
   nixpkgs = {
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
     };
   };
 
@@ -128,6 +127,17 @@ in
     enable = true;
     config = {
       theme = "OneHalfDark";
+    };
+    # Custom copy silences bat's "No themes were found" cache-build warning.
+    # Pinned to the commit bat v0.26.1 vendors as a submodule; palette matches
+    # bat's built-in OneHalfDark (bat only patches the name and a few scopes).
+    themes = {
+      OneHalfDark = {
+        src = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/sonph/onehalf/141c775ace6b71992305f144a8ab68e9a8ca4a25/sublimetext/OneHalfDark.tmTheme";
+          hash = "sha256-YgXiMR5DOEHwqhsVhitGy4krADZQ8x31CKTrw5onvbs=";
+        };
+      };
     };
   };
 
