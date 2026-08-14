@@ -154,4 +154,5 @@ in
   home.file.".tmux.conf".source = "${dotfiles}/.tmux.conf";
   home.file.".aerospace.toml".source = "${dotfiles}/.aerospace.toml";
   home.file.".wezterm.lua".source = "${dotfiles}/.wezterm.lua";
+  home.file."AGENTS.md".source = "${dotfiles}/AGENTS.md";
 }
