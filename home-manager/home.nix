@@ -1,4 +1,4 @@
-{ config, pkgs, lib, dotfiles, ... }:
+{ config, pkgs, dotfiles, ... }:
 
 let
   opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix {};
@@ -6,7 +6,8 @@ let
   # vim-plug plugins provided by nix instead of git clones. vim-plug sees the
   # dirs in plugged/ and skips cloning, so the Plug lines in dotfiles/nvim stay
   # untouched. Versions follow the nixpkgs pin: update via `nix flake update`
-  # + switch. Treesitter parsers are still refreshed per switch via TSUpdate.
+  # + switch. Treesitter parsers install on demand via auto_install in the
+  # nvim config; switches stay offline.
   nvimPlugged = pkgs.runCommand "nvim-plugged" { } ''
     mkdir -p $out/onehalf
     ln -s ${pkgs.vimPlugins.vim-airline} $out/vim-airline
@@ -50,12 +51,6 @@ in
     tmux
     tree-sitter
   ];
-
-  home.activation.updateTreesitterParsers = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    export PATH=$PATH:${pkgs.git}/bin:${pkgs.curl}/bin:${pkgs.tree-sitter}/bin
-    echo "Updating treesitter parsers..."
-    ${pkgs.neovim}/bin/nvim -u ~/.config/nvim/init.lua --headless +TSUpdate +qall
-  '';
 
   launchd.agents.opensuperwhisper = {
     enable = true;
