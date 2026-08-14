@@ -7,7 +7,7 @@
 
 stdenv.mkDerivation {
   pname = "opensuperwhisper";
-  version = "0.1.0";
+  version = "latest";
 
   # Hash-pinned "latest" URL: when upstream ships a new release the build
   # fails with a hash mismatch; copy the "got" hash from the error here.
@@ -39,6 +39,6 @@ stdenv.mkDerivation {
     homepage = "https://github.com/Starmel/OpenSuperWhisper";
     license = lib.licenses.mit;
     platforms = [ "aarch64-darwin" ];
-    maintainers = [ ];
+    sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
   };
 }
