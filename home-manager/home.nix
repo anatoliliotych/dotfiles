@@ -37,11 +37,8 @@ in
     aerospace
     opensuperwhisper-app
     autojump
-    bat
     eza
-    git
     gh
-    fzf
     nodejs
     curl
     htop
@@ -52,8 +49,6 @@ in
     (python313.withPackages (ps: with ps; [ httpx requests ]))
     tmux
     tree-sitter
-    zsh
-    zsh-fzf-tab
   ];
 
   home.activation.updateTreesitterParsers = lib.hm.dag.entryAfter ["writeBoundary"] ''
@@ -91,10 +86,6 @@ in
     enable = true;
   };
 
-  programs.ripgrep = {
-    enable = true;
-  };
-
   programs.direnv = {
     enable = true;
     package = pkgs.direnv.overrideAttrs (oldAttrs: {
@@ -104,7 +95,6 @@ in
 
   programs.zsh = {
     initContent = ''
-      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
       # ANTHROPIC_AUTH_TOKEN comes from 1Password. Item: "DeepSeek API" in the
       # Personal vault (API Credential). Non-secret ANTHROPIC_* config lives in
       # ~/.claude/settings.json "env".
@@ -112,6 +102,9 @@ in
         export ANTHROPIC_AUTH_TOKEN="$token"
       fi
     '';
+    plugins = [
+      { name = "fzf-tab"; src = pkgs.zsh-fzf-tab; file = "share/fzf-tab/fzf-tab.plugin.zsh"; }
+    ];
     enable = true;
     syntaxHighlighting = {
       enable = true;
