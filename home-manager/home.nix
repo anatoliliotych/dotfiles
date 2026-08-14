@@ -106,7 +106,7 @@ in
     initContent = ''
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
       # ANTHROPIC_AUTH_TOKEN comes from 1Password. Item: "DeepSeek API" in the
-      # Private vault (API Credential). Non-secret ANTHROPIC_* config lives in
+      # Personal vault (API Credential). Non-secret ANTHROPIC_* config lives in
       # ~/.claude/settings.json "env".
       if token="$(op read 'op://Personal/DeepSeek API/credential' 2>/dev/null)"; then
         export ANTHROPIC_AUTH_TOKEN="$token"
