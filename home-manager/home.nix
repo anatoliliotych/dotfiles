@@ -49,7 +49,7 @@ in
     llama-cpp
     neovim
     ripgrep
-    (python312.withPackages (ps: with ps; [ httpx requests ]))
+    (python313.withPackages (ps: with ps; [ httpx requests ]))
     tmux
     tree-sitter
     zsh
