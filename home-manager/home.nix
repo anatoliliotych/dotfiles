@@ -116,9 +116,6 @@ in
     };
 
     shellAliases = {
-      # Flake evaluation is always pure, so the self-updating OpenSuperWhisper
-      # fetch (hashless builtins.fetchurl) needs --impure on every invocation.
-      "home-manager"="home-manager --impure";
       # Detached tmux session "bg": window 1 runs the copilot llama-server,
       # window 2 runs caffeinate -d. Idempotent; attach with `tmux attach -t bg`.
       tm="tmux has-session -t bg 2>/dev/null || (tmux new-session -d -s bg -n copilot llama-server --fim-qwen-3b-default && tmux new-window -t bg -n caffeinate 'caffeinate -d')";
