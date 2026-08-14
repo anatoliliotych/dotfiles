@@ -2,6 +2,24 @@
 
 let
   opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix {};
+
+  # vim-plug plugins provided by nix instead of git clones. vim-plug sees the
+  # dirs in plugged/ and skips cloning, so the Plug lines in dotfiles/nvim stay
+  # untouched. Versions follow the nixpkgs pin: update via `nix flake update`
+  # + switch. Treesitter parsers are still refreshed per switch via TSUpdate.
+  nvimPlugged = pkgs.runCommand "nvim-plugged" { } ''
+    mkdir -p $out/onehalf
+    ln -s ${pkgs.vimPlugins.vim-airline} $out/vim-airline
+    ln -s ${pkgs.vimPlugins.vim-gitgutter} $out/vim-gitgutter
+    ln -s ${pkgs.vimPlugins.llama-vim} $out/llama.vim
+    ln -s ${pkgs.vimPlugins.fzf-lua} $out/fzf-lua
+    ln -s ${pkgs.vimPlugins.nvim-treesitter} $out/nvim-treesitter
+    ln -s ${pkgs.vimPlugins.indent-blankline-nvim} $out/indent-blankline.nvim
+    ln -s ${pkgs.vimPlugins.which-key-nvim} $out/which-key.nvim
+    ln -s ${pkgs.vimPlugins.vim-fugitive} $out/vim-fugitive
+    # nixpkgs flattens the repo; wrap in vim/ to match `rtp = 'vim'`.
+    ln -s ${pkgs.vimPlugins.onehalf} $out/onehalf/vim
+  '';
 in
 {
   home.username = "al";
@@ -33,23 +51,15 @@ in
     ripgrep
     (python312.withPackages (ps: with ps; [ httpx requests ]))
     tmux
+    tree-sitter
     zsh
     zsh-fzf-tab
   ];
 
-  home.activation.installNeoVimVimPlug = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    export PATH=$PATH:${pkgs.git}/bin:${pkgs.curl}/bin
-    mkdir -p "$HOME/.config/nvim/autoload"
-    mkdir -p "$HOME/.config/nvim/plugged"
-
-    if [ ! -f "$HOME/.config/nvim/autoload/plug.vim" ]; then
-      echo "Installing vim-plug..."
-      ${pkgs.curl}/bin/curl -fLo "$HOME/.config/nvim/autoload/plug.vim" --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    fi
-
-    echo "Installing/updating vim plugins..."
-    ${pkgs.neovim}/bin/nvim -u ~/.config/nvim/init.lua --headless +PlugInstall +PlugUpdate +TSUpdate +qall
+  home.activation.updateTreesitterParsers = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    export PATH=$PATH:${pkgs.git}/bin:${pkgs.curl}/bin:${pkgs.tree-sitter}/bin
+    echo "Updating treesitter parsers..."
+    ${pkgs.neovim}/bin/nvim -u ~/.config/nvim/init.lua --headless +TSUpdate +qall
   '';
 
   launchd.agents.opensuperwhisper = {
@@ -157,6 +167,9 @@ in
   home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source = "${dotfiles}/onehalfdark.zsh-theme";
   home.file.".config/nvim".source = "${dotfiles}/nvim";
   home.file.".config/nvim".recursive = true;
+  home.file.".config/nvim/plugged".source = nvimPlugged;
+  # vim-plug itself from nixpkgs - no curl bootstrap needed.
+  home.file.".config/nvim/autoload/plug.vim".source = "${pkgs.vimPlugins.vim-plug}/plug.vim";
   home.file.".tmux.conf".source = "${dotfiles}/.tmux.conf";
   home.file.".aerospace.toml".source = "${dotfiles}/.aerospace.toml";
   home.file.".wezterm.lua".source = "${dotfiles}/.wezterm.lua";
