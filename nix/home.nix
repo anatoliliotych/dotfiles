@@ -92,7 +92,7 @@ in
     config = {
       ProgramArguments = [
         "${pkgs.llama-cpp}/bin/llama-server"
-        "${config.home.homeDirectory}/.cache/huggingface/hub/models--ggml-org--Qwen2.5-Coder-3B-Q8_0-GGUF/snapshots/9c1de162ae417c9c3aacde97c729c4128de047d8/qwen2.5-coder-3b-q8_0.gguf"
+        "--fim-qwen-3b-default"
       ];
       RunAtLoad = true;
       KeepAlive = true;
