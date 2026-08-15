@@ -43,6 +43,7 @@ first.
 - `home-manager/nvim.nix` - the entire nvim configuration (nixvim)
 - `home-manager/darwin.nix` - system config: Touch ID sudo, weekly store maintenance
 - `home-manager/opensuperwhisper.nix` - OpenSuperWhisper.app package
+- `home-manager/mole.nix` - mole CLI package (tw93/mole, source-built; bump the version + hashes to update)
 
 Note: the nix daemon and `/etc/nix/nix.conf` are managed by the Determinate
 installer, not nix-darwin; store gc/optimise run as plain launchd daemons

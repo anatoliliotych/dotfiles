@@ -2,6 +2,7 @@
 
 let
   opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix {};
+  mole = pkgs.callPackage ./mole.nix {};
 in
 {
   home.username = "al";
@@ -21,6 +22,7 @@ in
     htop
     llm-agents.claude-code
     llama-cpp
+    mole
     ripgrep
     (python313.withPackages (ps: with ps; [ httpx requests ]))
     tmux
