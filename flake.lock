@@ -33,19 +33,6 @@
         "type": "github"
       }
     },
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-3fqb1FHSw6wgN51JBpM8gf1D5BvvjG7Xnx8QuGRo8fc=",
-        "path": "../",
-        "type": "path"
-      },
-      "original": {
-        "path": "../",
-        "type": "path"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -195,7 +182,6 @@
     },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
         "nix-darwin": "nix-darwin",

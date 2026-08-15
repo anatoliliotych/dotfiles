@@ -19,13 +19,9 @@
       url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dotfiles = {
-      url = "path:../";
-      flake = false;
-    };
   };
 
-  outputs = { nixpkgs, home-manager, llm-agents, nixvim, nix-darwin, dotfiles, ... }:
+  outputs = { self, nixpkgs, home-manager, llm-agents, nixvim, nix-darwin, ... }:
     let
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
@@ -38,17 +34,17 @@
         inherit system pkgs;
         specialArgs = { inherit nix-darwin; };
         modules = [
-          ./darwin.nix
+          ./nix/darwin.nix
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
-              extraSpecialArgs = { inherit dotfiles; };
+              extraSpecialArgs = { dotfiles = self; };
               users.al = {
                 imports = [
                   nixvim.homeModules.nixvim
-                  ./home.nix
-                  ./nvim.nix
+                  ./nix/home.nix
+                  ./nix/nvim.nix
                 ];
               };
             };
