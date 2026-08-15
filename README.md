@@ -9,7 +9,7 @@ Nix-managed macOS setup: nix-darwin (system) + home-manager (user) + nixvim (nvi
    curl https://install.determinate.systems/nix | sh -s -- install
    ```
 2. Enroll Touch ID, install 1Password and sign in with CLI integration enabled.
-3. Clone this repo anywhere (the config hardcodes user `al` and `/Users/al` home paths).
+3. Clone this repo anywhere, then set the `user` variable in `flake.nix` to the local account name.
 4. Register the flake for default discovery, so bare `sudo darwin-rebuild
    switch` resolves it (darwin-rebuild looks for /etc/nix-darwin/flake.nix
    and uses the machine hostname as the configuration attribute):

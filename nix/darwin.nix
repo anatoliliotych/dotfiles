@@ -1,4 +1,4 @@
-{ pkgs, nix-darwin, ... }:
+{ pkgs, nix-darwin, user, ... }:
 
 {
   nix.enable = false;
@@ -22,10 +22,7 @@
 
   services.tailscale.enable = true;
 
-  users.users.al = {
-    name = "al";
-    home = "/Users/al";
-  };
+  users.users.${user}.home = "/Users/${user}";
 
   environment.systemPackages = [
     nix-darwin.packages.${pkgs.stdenv.hostPlatform.system}.darwin-rebuild

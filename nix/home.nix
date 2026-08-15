@@ -1,12 +1,12 @@
-{ config, pkgs, lib, dotfiles, ... }:
+{ config, pkgs, lib, dotfiles, user, ... }:
 
 let
   opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix {};
   mole = pkgs.callPackage ./mole.nix {};
 in
 {
-  home.username = "al";
-  home.homeDirectory = "/Users/al";
+  home.username = user;
+  home.homeDirectory = "/Users/${user}";
   home.stateVersion = "26.05";
 
   home.packages = with pkgs; [

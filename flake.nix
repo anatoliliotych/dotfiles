@@ -24,6 +24,7 @@
   outputs = { self, nixpkgs, home-manager, llm-agents, nixvim, nix-darwin, ... }:
     let
       system = "aarch64-darwin";
+      user = "al";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -32,15 +33,15 @@
     in {
       darwinConfigurations."stardusty" = nix-darwin.lib.darwinSystem {
         inherit system pkgs;
-        specialArgs = { inherit nix-darwin; };
+        specialArgs = { inherit nix-darwin user; };
         modules = [
           ./nix/darwin.nix
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
-              extraSpecialArgs = { dotfiles = self; };
-              users.al = {
+              extraSpecialArgs = { dotfiles = self; inherit user; };
+              users.${user} = {
                 imports = [
                   nixvim.homeModules.nixvim
                   ./nix/home.nix
