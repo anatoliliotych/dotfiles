@@ -13,6 +13,7 @@ in
 
   home.packages = with pkgs; [
     _1password-cli
+    aerospace
     opensuperwhisper-app
     autojump
     eza
@@ -36,6 +37,22 @@ in
       ProgramArguments = [
         "/usr/bin/open"
         "${config.home.homeDirectory}/Applications/Home Manager Apps/OpenSuperWhisper.app"
+      ];
+      RunAtLoad = true;
+      KeepAlive = false;
+      LimitLoadToSessionType = "Aqua";
+      ProcessType = "Interactive";
+    };
+  };
+
+  # Autostart the window manager at login. Same pattern as opensuperwhisper:
+  # open launches the app once; KeepAlive stays off to avoid relaunch loops.
+  launchd.agents.aerospace = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "/usr/bin/open"
+        "${config.home.homeDirectory}/Applications/Home Manager Apps/AeroSpace.app"
       ];
       RunAtLoad = true;
       KeepAlive = false;
