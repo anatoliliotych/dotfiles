@@ -4,7 +4,6 @@ after-startup-command = [
   'exec-and-forget open -a "WezTerm"',
   'exec-and-forget open -a "Mail"',
   'exec-and-forget open -a "Calendar"',
-  'exec-and-forget open -a "Reminders"',
   'exec-and-forget open -a "Telegram"',
   'exec-and-forget open -a "Beeper Desktop"',
 ]
@@ -120,12 +119,6 @@ automatically-unhide-macos-hidden-apps = false
   run = 'move-node-to-workspace C'
   check-further-callbacks = false
 [[on-window-detected]]
-  if.app-id = 'com.apple.reminders'
-  run = [
-    'move-node-to-workspace C'
-  ]
-  check-further-callbacks = false
-[[on-window-detected]]
   if.app-id = 'com.apple.iCal'
   run = [
     'move-node-to-workspace C'
@@ -146,8 +139,7 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
   if.app-id = 'com.apple.finder'
   run = [
-    'layout floating',
-    'move-node-to-workspace T'
+    'layout floating'
   ]
   check-further-callbacks = false
 [mode.service.binding]
