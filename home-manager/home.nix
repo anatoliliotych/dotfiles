@@ -27,6 +27,7 @@ in
     (python313.withPackages (ps: with ps; [ httpx requests ]))
     tmux
     tree-sitter
+    wezterm
   ];
 
   launchd.agents.opensuperwhisper = {
