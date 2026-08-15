@@ -41,6 +41,9 @@ root dotfiles alike) are picked up from the working tree on the next switch.
 Untracked files are invisible to nix until `git add`ed; commit new dotfiles
 before deploying them.
 
+Format with `nix fmt -- flake.nix nix/*.nix` (nixfmt; nix 2.25 forwards only
+the given file args to the formatter, so the paths must be explicit).
+
 ## What lives where
 
 - `flake.nix` - inputs (nixpkgs, home-manager, nixvim, nix-darwin) and the "stardusty" configuration (named after the machine hostname)
