@@ -42,9 +42,14 @@ in
     dst="$HOME/Applications/OpenSuperWhisper.app"
     marker="$HOME/Applications/.opensuperwhisper.nix-source"
     if [[ ! -e "$dst" ]] || [[ "$(cat "$marker" 2>/dev/null)" != "${opensuperwhisper-app}" ]]; then
+      # Store copies are read-only, so make leftovers deletable before
+      # removing them and keep the fresh copy writable too.
+      chmod -R u+w "$dst.new" 2>/dev/null || true
       rm -rf "$dst.new"
-      cp -R "$src" "$dst.new"
+      chmod -R u+w "$dst" 2>/dev/null || true
       rm -rf "$dst"
+      cp -R "$src" "$dst.new"
+      chmod -R u+w "$dst.new"
       mv "$dst.new" "$dst"
       printf '%s' "${opensuperwhisper-app}" > "$marker"
     fi
