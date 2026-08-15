@@ -37,19 +37,18 @@
       system = "aarch64-darwin";
       user = "al";
       hostname = "stardusty";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [ llm-agents.overlays.shared-nixpkgs ];
-      };
     in
     {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
 
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
-        inherit system pkgs;
+        inherit system;
         specialArgs = { inherit nix-darwin user; };
         modules = [
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.overlays = [ llm-agents.overlays.shared-nixpkgs ];
+          }
           ./nix/darwin.nix
           home-manager.darwinModules.home-manager
           {
