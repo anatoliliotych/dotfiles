@@ -31,6 +31,11 @@
   # sudo with Touch ID
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  # Tailscale daemon + CLI. Runs tailscaled as a system service; log in with
+  # `sudo tailscale up`. Replaces the Tailscale.app GUI (userspace networking
+  # mode - MagicDNS/system-extension features come only with the app).
+  services.tailscale.enable = true;
+
   # Required by the home-manager integration: it reads the user's home from
   # here. The account itself already exists; nix-darwin does not create it.
   users.users.al = {
