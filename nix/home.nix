@@ -23,7 +23,6 @@ in
     eza
     gh
     nodejs
-    curl
     htop
     llm-agents.claude-code
     llama-cpp
