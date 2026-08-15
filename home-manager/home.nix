@@ -1,4 +1,4 @@
-{ config, pkgs, dotfiles, ... }:
+{ config, pkgs, lib, dotfiles, ... }:
 
 let
   opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix {};
@@ -14,7 +14,6 @@ in
   home.packages = with pkgs; [
     _1password-cli
     aerospace
-    opensuperwhisper-app
     autojump
     eza
     gh
@@ -31,12 +30,30 @@ in
     wezterm
   ];
 
+  # OpenSuperWhisper installs at a stable ~/Applications path instead of the
+  # hm-managed symlink into the nix store: macOS invalidates TCC grants when
+  # the app's real path changes, and a store path changes on every repackage.
+  # A fixed path with in-place replacement keeps Input Monitoring and
+  # Accessibility grants across updates. See opensuperwhisper.nix.
+  home.activation.installOpenSuperWhisper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    src="${opensuperwhisper-app}/Applications/OpenSuperWhisper.app"
+    dst="$HOME/Applications/OpenSuperWhisper.app"
+    marker="$dst/.nix-source"
+    if [[ ! -e "$dst" ]] || [[ "$(cat "$marker" 2>/dev/null)" != "${opensuperwhisper-app}" ]]; then
+      rm -rf "$dst.new"
+      cp -R "$src" "$dst.new"
+      printf '%s' "${opensuperwhisper-app}" > "$dst.new/.nix-source"
+      rm -rf "$dst"
+      mv "$dst.new" "$dst"
+    fi
+  '';
+
   launchd.agents.opensuperwhisper = {
     enable = true;
     config = {
       ProgramArguments = [
         "/usr/bin/open"
-        "${config.home.homeDirectory}/Applications/Home Manager Apps/OpenSuperWhisper.app"
+        "${config.home.homeDirectory}/Applications/OpenSuperWhisper.app"
       ];
       RunAtLoad = true;
       KeepAlive = false;

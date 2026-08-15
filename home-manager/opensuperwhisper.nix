@@ -25,6 +25,15 @@ stdenv.mkDerivation {
   # Preserve the app bundle code signature.
   dontStrip = true;
 
+  # macOS TCC gotcha: macOS silently invalidates an app's privacy grants
+  # (Input Monitoring, Accessibility) when the app's real path changes, while
+  # System Settings still shows the toggles ON. Symptom: the global shortcut
+  # (right Option) does nothing when other apps are focused. home.nix avoids
+  # this by installing the app at a stable ~/Applications path with in-place
+  # replacement. If a grant is ever lost anyway (e.g. after an OS update):
+  # remove the entry in Privacy & Security > Input Monitoring, relaunch the
+  # app, re-grant on prompt. Same for Accessibility if text insertion breaks.
+
   installPhase = ''
     runHook preInstall
 
