@@ -21,6 +21,10 @@
       url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tuicr = {
+      url = "github:agavra/tuicr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,6 +35,7 @@
       llm-agents,
       nixvim,
       nix-darwin,
+      tuicr,
       ...
     }:
     let
@@ -56,6 +61,7 @@
               useGlobalPkgs = true;
               extraSpecialArgs = {
                 dotfiles = self;
+                tuicr = tuicr.packages.${system}.default;
                 inherit user;
               };
               users.${user} = {

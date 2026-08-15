@@ -3,6 +3,7 @@
   pkgs,
   lib,
   dotfiles,
+  tuicr,
   user,
   ...
 }:
@@ -36,6 +37,7 @@ in
     ))
     tmux
     tree-sitter
+    tuicr
     wezterm
   ];
 
