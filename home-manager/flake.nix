@@ -33,9 +33,12 @@
         overlays = [ llm-agents.overlays.shared-nixpkgs ];
       };
     in {
-      # Single entry point: `darwin-rebuild switch` activates the system
+      # Single entry point: `sudo darwin-rebuild switch` activates the system
       # config (./darwin.nix) and home-manager (./home.nix, ./nvim.nix).
-      darwinConfigurations."al" = nix-darwin.lib.darwinSystem {
+      # Named after the hostname: bare darwin-rebuild resolves the default
+      # attribute as darwinConfigurations.<LocalHostName>, and discovers
+      # this flake via /etc/nix-darwin/flake.nix (a symlink to this file).
+      darwinConfigurations."stardusty" = nix-darwin.lib.darwinSystem {
         inherit system pkgs;
         specialArgs = { inherit nix-darwin; };
         modules = [

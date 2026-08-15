@@ -1,0 +1,3 @@
+# nix build artifacts (darwin-rebuild build / nix-build)
+result
+result-*
