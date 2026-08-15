@@ -85,6 +85,32 @@ in
     };
   };
 
+  launchd.agents.llama-server = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "${pkgs.llama-cpp}/bin/llama-server"
+        "${config.home.homeDirectory}/.cache/huggingface/hub/models--ggml-org--Qwen2.5-Coder-3B-Q8_0-GGUF/snapshots/9c1de162ae417c9c3aacde97c729c4128de047d8/qwen2.5-coder-3b-q8_0.gguf"
+      ];
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardOutPath = "${config.home.homeDirectory}/Library/Logs/llama-server.log";
+      StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/llama-server.log";
+    };
+  };
+
+  launchd.agents.caffeinate = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "/usr/bin/caffeinate"
+        "-d"
+      ];
+      RunAtLoad = true;
+      KeepAlive = true;
+    };
+  };
+
   nix = {
     package = pkgs.nix;
     settings = {
@@ -135,7 +161,6 @@ in
     };
 
     shellAliases = {
-      tm = "tmux has-session -t bg 2>/dev/null || (tmux new-session -d -s bg -n copilot llama-server --fim-qwen-3b-default && tmux new-window -t bg -n caffeinate 'caffeinate -d')";
       vim = "nvim";
       ls = "eza --icons --grid  --group-directories-first";
     };
