@@ -4,13 +4,8 @@
   programs.nixvim = {
     enable = true;
 
-    # The flake's `follows` puts nixvim on the same nixpkgs pin as everything
-    # else; state that explicitly to silence nixvim's warning about its own
-    # internal nixpkgs pin being overridden.
     nixpkgs.source = pkgs.path;
 
-    # No nixvim module for these; they join via packdir and need no config.
-    # The onehalf colorscheme is applied in extraConfigLua after plugins load.
     extraPlugins = [
       pkgs.vimPlugins.onehalf
       pkgs.vimPlugins.llama-vim
@@ -18,7 +13,6 @@
 
     globals = {
       mapleader = " ";
-      # netrw
       netrw_banner = 0;
       netrw_browse_split = 2;
       netrw_winsize = 40;
@@ -90,10 +84,8 @@
     extraConfigLua = ''
       vim.cmd('colorscheme onehalfdark')
       vim.cmd([[highlight default link SignColumn LineNr]])
-      -- vim-airline theme matching the colorscheme
       vim.g.airline_theme = 'onehalfdark'
 
-      -- WhichKey highlights, reapplied whenever the colorscheme changes
       local function set_whichkey_highlights()
         vim.cmd [[
           highlight WhichKeyNormal guibg=#353b45 guifg=#dcdfe4
@@ -107,7 +99,6 @@
         callback = set_whichkey_highlights,
       })
 
-      -- Recursive file search with :find (appends to the default path)
       vim.o.path = vim.o.path .. '**'
 
       vim.api.nvim_create_autocmd('FileType', {

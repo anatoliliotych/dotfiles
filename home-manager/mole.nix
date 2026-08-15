@@ -17,14 +17,8 @@ buildGoModule rec {
 
   vendorHash = "sha256-Q7VzGJ1bGAyMi2Ih3LvI92lCVqxKIyr7H89LAFczNbo=";
 
-  # Same recipe as the homebrew-core formula: the bash entrypoint (mole) and
-  # its helpers live in libexec, and the two Go binaries sit next to the .sh
-  # wrappers that exec them as bin/analyze-go and bin/status-go.
   subPackages = [ "cmd/analyze" "cmd/status" ];
 
-  # Upstream tests need GNU du (BSD du lacks -I) and a GUI user session for
-  # the macOS Trash API, so they cannot run in the nix sandbox. The
-  # homebrew formula skips them too and only smoke-tests the installed CLI.
   doCheck = false;
 
   ldflags = [
