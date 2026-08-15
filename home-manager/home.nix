@@ -8,11 +8,7 @@ in
   home.homeDirectory = "/Users/al";
   home.stateVersion = "26.05";
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+  # allowUnfree is set on the pkgs built in flake.nix.
 
   home.packages = with pkgs; [
     _1password-cli
@@ -46,9 +42,9 @@ in
     };
   };
 
-  programs.home-manager = {
-    enable = true;
-  };
+  # No programs.home-manager here: home-manager is activated by nix-darwin
+  # (darwin-rebuild switch). The hm nix module below only writes user-level
+  # nix.conf; system nix config is owned by the Determinate installer.
 
   nix = {
     package = pkgs.nix;

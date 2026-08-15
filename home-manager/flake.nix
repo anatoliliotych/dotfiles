@@ -12,31 +12,48 @@
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     dotfiles = {
       url = "path:/Users/al/dotfiles";
       flake = false;
     };
   };
 
-  outputs = { nixpkgs, home-manager, llm-agents, nixvim, dotfiles, ... }:
+  outputs = { nixpkgs, home-manager, llm-agents, nixvim, nix-darwin, dotfiles, ... }:
     let
-      inherit (nixpkgs) lib;
       system = "aarch64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
+      # The overlay and allowUnfree are baked in here because home-manager
+      # runs with useGlobalPkgs and no nixpkgs module of its own.
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [ llm-agents.overlays.shared-nixpkgs ];
+      };
     in {
-      homeConfigurations."al" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit dotfiles; };
-
+      # Single entry point: `darwin-rebuild switch` activates the system
+      # config (./darwin.nix) and home-manager (./home.nix, ./nvim.nix).
+      darwinConfigurations."al" = nix-darwin.lib.darwinSystem {
+        inherit system pkgs;
+        specialArgs = { inherit nix-darwin; };
         modules = [
+          ./darwin.nix
+          home-manager.darwinModules.home-manager
           {
-            nixpkgs.overlays = [
-              llm-agents.overlays.shared-nixpkgs
-            ];
+            home-manager = {
+              useGlobalPkgs = true;
+              extraSpecialArgs = { inherit dotfiles; };
+              users.al = {
+                imports = [
+                  nixvim.homeModules.nixvim
+                  ./home.nix
+                  ./nvim.nix
+                ];
+              };
+            };
           }
-          nixvim.homeModules.nixvim
-          ./home.nix
-          ./nvim.nix
         ];
       };
     };
