@@ -12,7 +12,6 @@ in
 
   home.packages = with pkgs; [
     _1password-cli
-    aerospace
     opensuperwhisper-app
     autojump
     eza
