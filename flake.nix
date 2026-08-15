@@ -23,7 +23,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, llm-agents, nixvim, nix-darwin, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      llm-agents,
+      nixvim,
+      nix-darwin,
+      ...
+    }:
     let
       system = "aarch64-darwin";
       user = "al";
@@ -33,7 +42,10 @@
         config.allowUnfree = true;
         overlays = [ llm-agents.overlays.shared-nixpkgs ];
       };
-    in {
+    in
+    {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
+
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
         inherit system pkgs;
         specialArgs = { inherit nix-darwin user; };
@@ -43,7 +55,10 @@
           {
             home-manager = {
               useGlobalPkgs = true;
-              extraSpecialArgs = { dotfiles = self; inherit user; };
+              extraSpecialArgs = {
+                dotfiles = self;
+                inherit user;
+              };
               users.${user} = {
                 imports = [
                   nixvim.homeModules.nixvim

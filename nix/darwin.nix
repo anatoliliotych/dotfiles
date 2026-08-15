@@ -1,4 +1,9 @@
-{ pkgs, nix-darwin, user, ... }:
+{
+  pkgs,
+  nix-darwin,
+  user,
+  ...
+}:
 
 {
   nix.enable = false;
@@ -7,14 +12,26 @@
     command = "${pkgs.nix}/bin/nix-collect-garbage --delete-older-than 14d";
     serviceConfig = {
       RunAtLoad = false;
-      StartCalendarInterval = [ { Weekday = 0; Hour = 2; Minute = 30; } ];
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 2;
+          Minute = 30;
+        }
+      ];
     };
   };
   launchd.daemons.nix-optimise = {
     command = "${pkgs.nix}/bin/nix-store --optimise";
     serviceConfig = {
       RunAtLoad = false;
-      StartCalendarInterval = [ { Weekday = 0; Hour = 3; Minute = 0; } ];
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 3;
+          Minute = 0;
+        }
+      ];
     };
   };
 

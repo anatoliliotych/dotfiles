@@ -17,7 +17,10 @@ buildGoModule rec {
 
   vendorHash = "sha256-Q7VzGJ1bGAyMi2Ih3LvI92lCVqxKIyr7H89LAFczNbo=";
 
-  subPackages = [ "cmd/analyze" "cmd/status" ];
+  subPackages = [
+    "cmd/analyze"
+    "cmd/status"
+  ];
 
   doCheck = false;
 

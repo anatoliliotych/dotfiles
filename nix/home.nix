@@ -1,8 +1,15 @@
-{ config, pkgs, lib, dotfiles, user, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  dotfiles,
+  user,
+  ...
+}:
 
 let
-  opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix {};
-  mole = pkgs.callPackage ./mole.nix {};
+  opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix { };
+  mole = pkgs.callPackage ./mole.nix { };
 in
 {
   home.username = user;
@@ -22,7 +29,12 @@ in
     llama-cpp
     mole
     ripgrep
-    (python313.withPackages (ps: with ps; [ httpx requests ]))
+    (python313.withPackages (
+      ps: with ps; [
+        httpx
+        requests
+      ]
+    ))
     tmux
     tree-sitter
     wezterm
@@ -77,7 +89,10 @@ in
   nix = {
     package = pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -99,7 +114,11 @@ in
       fi
     '';
     plugins = [
-      { name = "fzf-tab"; src = pkgs.zsh-fzf-tab; file = "share/fzf-tab/fzf-tab.plugin.zsh"; }
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
     ];
     enable = true;
     syntaxHighlighting = {
@@ -107,15 +126,19 @@ in
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "vi-mode" "autojump"];
+      plugins = [
+        "git"
+        "vi-mode"
+        "autojump"
+      ];
       theme = "onehalfdark";
       custom = "${config.home.homeDirectory}/.config/oh-my-zsh";
     };
 
     shellAliases = {
-      tm="tmux has-session -t bg 2>/dev/null || (tmux new-session -d -s bg -n copilot llama-server --fim-qwen-3b-default && tmux new-window -t bg -n caffeinate 'caffeinate -d')";
-      vim="nvim";
-      ls="eza --icons --grid  --group-directories-first";
+      tm = "tmux has-session -t bg 2>/dev/null || (tmux new-session -d -s bg -n copilot llama-server --fim-qwen-3b-default && tmux new-window -t bg -n caffeinate 'caffeinate -d')";
+      vim = "nvim";
+      ls = "eza --icons --grid  --group-directories-first";
     };
   };
 
@@ -140,7 +163,8 @@ in
     EDITOR = "nvim";
   };
 
-  home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source = "${dotfiles}/configs/onehalfdark.zsh-theme";
+  home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source =
+    "${dotfiles}/configs/onehalfdark.zsh-theme";
   home.file.".tmux.conf".source = "${dotfiles}/configs/.tmux.conf";
   home.file.".aerospace.toml".source = "${dotfiles}/configs/.aerospace.toml";
   home.file.".wezterm.lua".source = "${dotfiles}/configs/.wezterm.lua";

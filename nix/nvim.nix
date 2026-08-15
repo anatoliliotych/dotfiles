@@ -48,13 +48,29 @@
         enable = true;
         settings = {
           ensure_installed = [
-            "bash" "html" "slim" "css" "lua" "dockerfile"
-            "vim" "vimdoc" "query" "markdown" "markdown_inline"
-            "json" "javascript" "yaml" "ruby"
+            "bash"
+            "html"
+            "slim"
+            "css"
+            "lua"
+            "dockerfile"
+            "vim"
+            "vimdoc"
+            "query"
+            "markdown"
+            "markdown_inline"
+            "json"
+            "javascript"
+            "yaml"
+            "ruby"
           ];
           auto_install = true;
-          highlight = { enable = true; };
-          indent = { enable = true; };
+          highlight = {
+            enable = true;
+          };
+          indent = {
+            enable = true;
+          };
         };
       };
       indent-blankline.enable = true;
@@ -63,22 +79,160 @@
     };
 
     keymaps = [
-      { mode = "n"; key = "<leader>o"; action = "<C-w>o"; options = { desc = "Only keep current window"; }; }
-      { mode = "n"; key = "<leader>e"; action = ":Ve<CR>"; options = { desc = "Open netrw"; }; }
-      { mode = "n"; key = "<leader>w"; action = ":w<CR>"; options = { desc = "Save"; }; }
-      { mode = "n"; key = "<leader>q"; action = ":q<CR>"; options = { desc = "Quit"; }; }
-      { mode = "n"; key = "<C-k>"; action = { __raw = "function() vim.cmd('resize +5') end"; }; options = { desc = "Increase window height by 5"; }; }
-      { mode = "n"; key = "<C-j>"; action = { __raw = "function() vim.cmd('resize -5') end"; }; options = { desc = "Decrease window height by 5"; }; }
-      { mode = "n"; key = "<C-h>"; action = { __raw = "function() vim.cmd('vertical resize -5') end"; }; options = { desc = "Decrease window width by 5"; }; }
-      { mode = "n"; key = "<C-l>"; action = { __raw = "function() vim.cmd('vertical resize +5') end"; }; options = { desc = "Increase window width by 5"; }; }
-      { mode = "n"; key = "<C-=>"; action = "<C-w>="; options = { noremap = true; desc = "Equalize all splits"; }; }
-      { mode = "t"; key = "<Esc>"; action = "<C-\\><C-n>"; options = { noremap = true; silent = true; }; }
-      { mode = "n"; key = "<leader>t"; action = { __raw = "function() vim.cmd('vsplit | terminal') end"; }; options = { desc = "Open terminal in vertical split"; noremap = true; silent = true; }; }
-      { mode = "n"; key = "<leader>T"; action = { __raw = "function() vim.cmd('tabnew | terminal') end"; }; options = { desc = "Open terminal in new tab"; noremap = true; silent = true; }; }
-      { mode = "n"; key = "<leader>ff"; action = { __raw = "function() require('fzf-lua').files() end"; }; options = { desc = "FzfLua Files"; }; }
-      { mode = "n"; key = "<leader>fg"; action = { __raw = "function() require('fzf-lua').live_grep() end"; }; options = { desc = "FzfLua Live Grep"; }; }
-      { mode = "n"; key = "<leader>fb"; action = { __raw = "function() require('fzf-lua').buffers() end"; }; options = { desc = "FzfLua Buffers"; }; }
-      { mode = "n"; key = "<leader>fr"; action = { __raw = "function() require('fzf-lua').resume() end"; }; options = { desc = "FzfLua Resume"; }; }
+      {
+        mode = "n";
+        key = "<leader>o";
+        action = "<C-w>o";
+        options = {
+          desc = "Only keep current window";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>e";
+        action = ":Ve<CR>";
+        options = {
+          desc = "Open netrw";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>w";
+        action = ":w<CR>";
+        options = {
+          desc = "Save";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>q";
+        action = ":q<CR>";
+        options = {
+          desc = "Quit";
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-k>";
+        action = {
+          __raw = "function() vim.cmd('resize +5') end";
+        };
+        options = {
+          desc = "Increase window height by 5";
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-j>";
+        action = {
+          __raw = "function() vim.cmd('resize -5') end";
+        };
+        options = {
+          desc = "Decrease window height by 5";
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-h>";
+        action = {
+          __raw = "function() vim.cmd('vertical resize -5') end";
+        };
+        options = {
+          desc = "Decrease window width by 5";
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-l>";
+        action = {
+          __raw = "function() vim.cmd('vertical resize +5') end";
+        };
+        options = {
+          desc = "Increase window width by 5";
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-=>";
+        action = "<C-w>=";
+        options = {
+          noremap = true;
+          desc = "Equalize all splits";
+        };
+      }
+      {
+        mode = "t";
+        key = "<Esc>";
+        action = "<C-\\><C-n>";
+        options = {
+          noremap = true;
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>t";
+        action = {
+          __raw = "function() vim.cmd('vsplit | terminal') end";
+        };
+        options = {
+          desc = "Open terminal in vertical split";
+          noremap = true;
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>T";
+        action = {
+          __raw = "function() vim.cmd('tabnew | terminal') end";
+        };
+        options = {
+          desc = "Open terminal in new tab";
+          noremap = true;
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>ff";
+        action = {
+          __raw = "function() require('fzf-lua').files() end";
+        };
+        options = {
+          desc = "FzfLua Files";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>fg";
+        action = {
+          __raw = "function() require('fzf-lua').live_grep() end";
+        };
+        options = {
+          desc = "FzfLua Live Grep";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>fb";
+        action = {
+          __raw = "function() require('fzf-lua').buffers() end";
+        };
+        options = {
+          desc = "FzfLua Buffers";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>fr";
+        action = {
+          __raw = "function() require('fzf-lua').resume() end";
+        };
+        options = {
+          desc = "FzfLua Resume";
+        };
+      }
     ];
 
     extraConfigLua = ''
