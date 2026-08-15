@@ -28,7 +28,7 @@
   };
 
   environment.systemPackages = [
-    nix-darwin.packages.${pkgs.system}.darwin-rebuild
+    nix-darwin.packages.${pkgs.stdenv.hostPlatform.system}.darwin-rebuild
   ];
 
   system.stateVersion = 6;
