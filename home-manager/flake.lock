@@ -36,13 +36,13 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1786801024,
-        "narHash": "sha256-gVHfyf5AKvJDNb5Ox3ep/HQZ1xepIAgTI4XuiH2QnX0=",
-        "path": "/Users/al/dotfiles",
+        "lastModified": 0,
+        "narHash": "sha256-3fqb1FHSw6wgN51JBpM8gf1D5BvvjG7Xnx8QuGRo8fc=",
+        "path": "../",
         "type": "path"
       },
       "original": {
-        "path": "/Users/al/dotfiles",
+        "path": "../",
         "type": "path"
       }
     },

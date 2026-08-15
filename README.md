@@ -9,7 +9,7 @@ Nix-managed macOS setup: nix-darwin (system) + home-manager (user) + nixvim (nvi
    curl https://install.determinate.systems/nix | sh -s -- install
    ```
 2. Enroll Touch ID, install 1Password and sign in with CLI integration enabled.
-3. Clone this repo to `~/dotfiles` (the flake expects this path and user `al`).
+3. Clone this repo anywhere (the config hardcodes user `al` and `/Users/al` home paths).
 4. Register the flake for default discovery, so bare `sudo darwin-rebuild
    switch` resolves it (darwin-rebuild looks for /etc/nix-darwin/flake.nix
    and uses the machine hostname as the configuration attribute):
@@ -35,6 +35,18 @@ applies system + home-manager changes; no flake flag needed (it is discovered
 via /etc/nix-darwin/flake.nix, and the configuration is named after the
 machine hostname). To bump versions, run `nix flake update` in `home-manager/`
 first.
+
+Root dotfiles (`.tmux.conf`, `.aerospace.toml`, `.wezterm.lua`, the zsh theme)
+are pulled in through the `dotfiles` path input, which is snapshotted in
+`flake.lock` and git-filtered (only tracked files are included). After editing
+one of them, re-snapshot before switching:
+
+```
+nix flake lock --update-input dotfiles
+```
+
+Files under `home-manager/` need no such step (they are flake source and are
+picked up from the working tree).
 
 ## What lives where
 
