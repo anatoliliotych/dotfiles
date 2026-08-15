@@ -35,16 +35,19 @@ in
   # the app's real path changes, and a store path changes on every repackage.
   # A fixed path with in-place replacement keeps Input Monitoring and
   # Accessibility grants across updates. See opensuperwhisper.nix.
+  # The marker lives OUTSIDE the bundle: the bundle must stay byte-identical
+  # to the store copy (it is signed + notarized), and store copies are
+  # read-only, so nothing can be written inside it anyway.
   home.activation.installOpenSuperWhisper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     src="${opensuperwhisper-app}/Applications/OpenSuperWhisper.app"
     dst="$HOME/Applications/OpenSuperWhisper.app"
-    marker="$dst/.nix-source"
+    marker="$HOME/Applications/.opensuperwhisper.nix-source"
     if [[ ! -e "$dst" ]] || [[ "$(cat "$marker" 2>/dev/null)" != "${opensuperwhisper-app}" ]]; then
       rm -rf "$dst.new"
       cp -R "$src" "$dst.new"
-      printf '%s' "${opensuperwhisper-app}" > "$dst.new/.nix-source"
       rm -rf "$dst"
       mv "$dst.new" "$dst"
+      printf '%s' "${opensuperwhisper-app}" > "$marker"
     fi
   '';
 
