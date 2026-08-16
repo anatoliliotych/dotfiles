@@ -37,6 +37,19 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  system.primaryUser = user;
+
+  system.defaults.dock = {
+    tilesize = 47;
+    autohide = true;
+    show-recents = false;
+  };
+
+  system.defaults.trackpad = {
+    Clicking = true;
+    TrackpadThreeFingerDrag = true;
+  };
+
   services.tailscale.enable = true;
 
   users.users.${user}.home = "/Users/${user}";
