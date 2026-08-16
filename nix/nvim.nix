@@ -42,7 +42,7 @@
 
     plugins = {
       airline.enable = true;
-      gitgutter.enable = true;
+      gitsigns.enable = true;
       fzf-lua.enable = true;
       treesitter = {
         enable = true;
