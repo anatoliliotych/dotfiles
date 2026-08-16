@@ -9,7 +9,6 @@
 }:
 
 let
-  opensuperwhisper-app = pkgs.callPackage ./opensuperwhisper.nix { };
   mole = pkgs.callPackage ./mole.nix { };
 in
 {
@@ -40,38 +39,6 @@ in
     tuicr
     wezterm
   ];
-
-  home.activation.installOpenSuperWhisper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    src="${opensuperwhisper-app}/Applications/OpenSuperWhisper.app"
-    dst="$HOME/Applications/OpenSuperWhisper.app"
-    marker="$HOME/Applications/.opensuperwhisper.nix-source"
-    if [[ ! -e "$dst" ]] || [[ "$(cat "$marker" 2>/dev/null)" != "${opensuperwhisper-app}" ]]; then
-      # Store copies are read-only, so make leftovers deletable before
-      # removing them and keep the fresh copy writable too.
-      chmod -R u+w "$dst.new" 2>/dev/null || true
-      rm -rf "$dst.new"
-      chmod -R u+w "$dst" 2>/dev/null || true
-      rm -rf "$dst"
-      cp -R "$src" "$dst.new"
-      chmod -R u+w "$dst.new"
-      mv "$dst.new" "$dst"
-      printf '%s' "${opensuperwhisper-app}" > "$marker"
-    fi
-  '';
-
-  launchd.agents.opensuperwhisper = {
-    enable = true;
-    config = {
-      ProgramArguments = [
-        "/usr/bin/open"
-        "${config.home.homeDirectory}/Applications/OpenSuperWhisper.app"
-      ];
-      RunAtLoad = true;
-      KeepAlive = false;
-      LimitLoadToSessionType = "Aqua";
-      ProcessType = "Interactive";
-    };
-  };
 
   launchd.agents.aerospace = {
     enable = true;
@@ -134,9 +101,6 @@ in
 
   programs.zsh = {
     initContent = ''
-      # ANTHROPIC_AUTH_TOKEN comes from 1Password. Item: "DeepSeek API" in the
-      # Personal vault (API Credential). Non-secret ANTHROPIC_* config lives in
-      # ~/.claude/settings.json "env".
       if token="$(op read 'op://Personal/DeepSeek API/credential' 2>/dev/null)"; then
         export ANTHROPIC_AUTH_TOKEN="$token"
       fi
