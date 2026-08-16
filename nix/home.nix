@@ -27,7 +27,6 @@
     (python313.withPackages (
       ps: with ps; [
         httpx
-        requests
       ]
     ))
     tmux
@@ -35,16 +34,6 @@
     tuicr
     wezterm
   ];
-
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-    };
-  };
 
   programs.direnv = {
     enable = true;

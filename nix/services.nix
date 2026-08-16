@@ -44,4 +44,23 @@
       KeepAlive = true;
     };
   };
+
+  launchd.agents.llama-log-rotate = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "/bin/sh"
+        "-c"
+        "log=\"$HOME/Library/Logs/llama-server.log\"; if [ -f \"$log\" ]; then mv \"$log\" \"$log.1\"; launchctl kickstart -k gui/$(id -u)/org.nix-community.home.llama-server; fi"
+      ];
+      RunAtLoad = false;
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 3;
+          Minute = 30;
+        }
+      ];
+    };
+  };
 }
