@@ -10,7 +10,7 @@ let
       owner = "andersondanilo";
       repo = "tmux-onehalf-theme";
       rev = "1a099d775c948bc1b72c16c05aca5fb2f1bd3c03";
-      hash = "sha256-RUG83XpT+Fg+7xG5NDcrq34d0pEZ6JQ5hSuO3DDMrI0=";
+      hash = "sha256-ExUJc14niGSNzqX3e1GjxZMv0y4gLmzfoQG0hzRFI5s=";
     };
 
     meta = {
