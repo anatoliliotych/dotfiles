@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of anatoli.liotych";
+  description = "nix-darwin + home-manager configuration of anatoli.liotych";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";

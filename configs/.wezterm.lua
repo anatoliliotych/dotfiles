@@ -11,7 +11,6 @@ config.font_size = 22
 config.window_decorations = 'RESIZE'
 config.hide_tab_bar_if_only_one_tab = true
 config.window_padding = { left = 5, right = 5, top = 5, bottom = 5 }
-config.prefer_egl = true
 
 config.keys = {
   { key = '/', mods = 'CTRL', action=act.SendString("\x1f") },

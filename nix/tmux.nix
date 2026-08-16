@@ -24,30 +24,26 @@ in
 {
   programs.tmux = {
     enable = true;
+    terminal = "screen-256color";
+    baseIndex = 1;
+    escapeTime = 0;
     plugins = [
       tmux-onehalf
       pkgs.tmuxPlugins.cpu
     ];
     extraConfig = ''
-      # Set default terminal and enable 256 colors
-      set -g default-terminal "screen-256color"
+      # Enable 256 colors
       set -as terminal-features ",xterm-256color:RGB"
 
       set -g status-justify centre
       # Enable xterm keys
       setw -g xterm-keys on
 
-      # Reduce escape time for faster response
-      set -s escape-time 0
-
       # Increase history limit
       set-option -g history-limit 1000000
 
       # Enable clipboard integration
       set -g set-clipboard on
-
-      # Start window numbering at 1
-      set -g base-index 1
 
       # Enable aggressive window resizing
       setw -g aggressive-resize on
