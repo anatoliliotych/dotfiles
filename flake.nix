@@ -65,6 +65,7 @@
               users.${user} = {
                 imports = [
                   nixvim.homeModules.nixvim
+                  ./nix/git.nix
                   ./nix/home.nix
                   ./nix/nvim.nix
                   ./nix/opensuperwhisper.nix
