@@ -73,6 +73,7 @@
                   ./nix/nvim.nix
                   ./nix/opensuperwhisper.nix
                   ./nix/tmux.nix
+                  ./nix/tuicr.nix
                   ./nix/zsh.nix
                 ];
               };
