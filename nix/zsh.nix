@@ -71,7 +71,7 @@
 
     shellAliases = {
       vim = "nvim";
-      ls = "eza --icons --grid  --group-directories-first";
+      ls = "eza --icons --group-directories-first";
     };
   };
 }
