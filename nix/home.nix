@@ -2,6 +2,7 @@
   config,
   pkgs,
   dotfiles,
+  tuicr,
   user,
   ...
 }:
@@ -30,6 +31,7 @@
     ))
     tmux
     tree-sitter
+    tuicr
     wezterm
   ];
 

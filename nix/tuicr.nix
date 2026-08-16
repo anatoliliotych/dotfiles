@@ -1,5 +1,0 @@
-{ tuicr, ... }:
-
-{
-  home.packages = [ tuicr ];
-}
