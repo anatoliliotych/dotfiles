@@ -40,6 +40,8 @@
       system = "aarch64-darwin";
       user = "al";
       hostname = "stardusty";
+      gitName = "Anatoli Liotych";
+      gitEmail = "anatoli.liotych@gmail.com";
     in
     {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
@@ -60,7 +62,7 @@
               extraSpecialArgs = {
                 dotfiles = self;
                 tuicr = tuicr.packages.${system}.default;
-                inherit user;
+                inherit user gitName gitEmail;
               };
               users.${user} = {
                 imports = [

@@ -1,12 +1,16 @@
-{ ... }:
+{
+  gitName,
+  gitEmail,
+  ...
+}:
 
 {
   programs.git = {
     enable = true;
     settings = {
       user = {
-        name = "Anatoli Liotych";
-        email = "anatoli.liotych@gmail.com";
+        name = gitName;
+        email = gitEmail;
       };
       fetch = {
         prune = true;
