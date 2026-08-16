@@ -50,7 +50,5 @@
     EDITOR = "nvim";
   };
 
-  home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source =
-    "${dotfiles}/configs/onehalfdark.zsh-theme";
   home.file."AGENTS.md".source = "${dotfiles}/AGENTS.md";
 }
