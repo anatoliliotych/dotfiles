@@ -57,8 +57,8 @@
       StartCalendarInterval = [
         {
           Weekday = 0;
-          Hour = 3;
-          Minute = 30;
+          Hour = 10;
+          Minute = 45;
         }
       ];
     };

@@ -15,8 +15,8 @@
       StartCalendarInterval = [
         {
           Weekday = 0;
-          Hour = 2;
-          Minute = 30;
+          Hour = 10;
+          Minute = 0;
         }
       ];
     };
@@ -28,8 +28,8 @@
       StartCalendarInterval = [
         {
           Weekday = 0;
-          Hour = 3;
-          Minute = 0;
+          Hour = 10;
+          Minute = 30;
         }
       ];
     };
