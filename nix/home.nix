@@ -8,9 +8,6 @@
   ...
 }:
 
-let
-  mole = pkgs.callPackage ./mole.nix { };
-in
 {
   home.username = user;
   home.homeDirectory = "/Users/${user}";
@@ -26,7 +23,6 @@ in
     htop
     llm-agents.claude-code
     llama-cpp
-    mole
     ripgrep
     (python313.withPackages (
       ps: with ps; [

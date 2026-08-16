@@ -69,6 +69,7 @@
                   nixvim.homeModules.nixvim
                   ./nix/git.nix
                   ./nix/home.nix
+                  ./nix/mole.nix
                   ./nix/nvim.nix
                   ./nix/opensuperwhisper.nix
                   ./nix/tmux.nix
