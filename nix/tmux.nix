@@ -24,7 +24,10 @@ in
 {
   programs.tmux = {
     enable = true;
-    plugins = [ tmux-onehalf ];
+    plugins = [
+      tmux-onehalf
+      pkgs.tmuxPlugins.cpu
+    ];
     extraConfig = ''
       # Set default terminal and enable 256 colors
       set -g default-terminal "screen-256color"
@@ -48,23 +51,6 @@ in
 
       # Enable aggressive window resizing
       setw -g aggressive-resize on
-
-      # Status bar configuration
-      set -g status-fg white
-      set -g status-bg default
-      set -g status-style bright
-      set -g status-right '#H'
-
-      # Window status styling
-      set-window-option -g window-status-style fg=white
-      set-window-option -g window-status-style bg=default
-      set-window-option -g window-status-style dim
-
-      # Active window styling
-      set-window-option -g window-status-current-style fg=white
-      set-window-option -g window-status-current-style bg=default
-      set-window-option -g window-status-current-style bright
-      set-window-option -g window-status-current-style bg=red
 
       # Monitor window activity
       setw -g monitor-activity on
