@@ -189,9 +189,6 @@ in
       fetch = {
         prune = true;
       };
-      push = {
-        autoSetupRemote = true;
-      };
       rerere = {
         enabled = true;
       };
