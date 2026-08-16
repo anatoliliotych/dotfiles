@@ -43,6 +43,15 @@
     tilesize = 47;
     autohide = true;
     show-recents = false;
+    # Hot corners: 13 = Lock Screen, 1 = Disabled
+    wvous-tr-corner = 13;
+    wvous-br-corner = 1;
+  };
+
+  # The Cmd modifier on the top-right corner (nix-darwin has no typed
+  # option for hot corner modifiers).
+  system.defaults.CustomUserPreferences."com.apple.dock" = {
+    "wvous-tr-modifier" = 1048576;
   };
 
   system.defaults.trackpad = {
