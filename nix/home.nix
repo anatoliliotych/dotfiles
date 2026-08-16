@@ -186,6 +186,29 @@ in
         name = "Anatoli Liotych";
         email = "anatoli.liotych@gmail.com";
       };
+      fetch = {
+        prune = true;
+      };
+      push = {
+        autoSetupRemote = true;
+      };
+      rerere = {
+        enabled = true;
+      };
+      merge = {
+        conflictStyle = "zdiff3";
+      };
+      diff = {
+        algorithm = "histogram";
+      };
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      theme = "OneHalfDark";
     };
   };
 
