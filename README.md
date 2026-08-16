@@ -55,7 +55,6 @@ the given file args to the formatter, so the paths must be explicit).
 - `nix/darwin.nix` - system config: Touch ID sudo, weekly store maintenance
 - `nix/opensuperwhisper.nix` - OpenSuperWhisper.app package
 - `nix/mole.nix` - mole CLI package (tw93/mole, source-built; bump the version + hashes to update)
-- `configs/` - dotfiles linked into `~` via home-manager (`onehalfdark.zsh-theme`)
 
 Note: the nix daemon and `/etc/nix/nix.conf` are managed by the Determinate
 installer, not nix-darwin; store gc/optimise run as plain launchd daemons
