@@ -74,6 +74,7 @@
                   ./nix/opensuperwhisper.nix
                   ./nix/services.nix
                   ./nix/tmux.nix
+                  ./nix/wezterm.nix
                   ./nix/zsh.nix
                 ];
               };
