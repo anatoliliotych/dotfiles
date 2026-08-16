@@ -17,6 +17,7 @@
     aerospace
     autojump
     eza
+    fzf
     gh
     nodejs
     htop
@@ -43,10 +44,6 @@
         "flakes"
       ];
     };
-  };
-
-  programs.fzf = {
-    enable = true;
   };
 
   programs.direnv = {
