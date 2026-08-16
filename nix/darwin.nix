@@ -59,6 +59,13 @@
     TrackpadThreeFingerDrag = true;
   };
 
+  system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
+
+  system.defaults.finder = {
+    ShowPathbar = true;
+    ShowStatusBar = true;
+  };
+
   services.tailscale.enable = true;
 
   users.users.${user}.home = "/Users/${user}";
