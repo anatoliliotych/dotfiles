@@ -5,20 +5,6 @@
 }:
 
 {
-  launchd.agents.aerospace = {
-    enable = true;
-    config = {
-      ProgramArguments = [
-        "/usr/bin/open"
-        "${config.home.homeDirectory}/Applications/Home Manager Apps/AeroSpace.app"
-      ];
-      RunAtLoad = true;
-      KeepAlive = false;
-      LimitLoadToSessionType = "Aqua";
-      ProcessType = "Interactive";
-    };
-  };
-
   launchd.agents.llama-server = {
     enable = true;
     config = {

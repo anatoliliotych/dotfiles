@@ -67,6 +67,7 @@
               users.${user} = {
                 imports = [
                   nixvim.homeModules.nixvim
+                  ./nix/aerospace.nix
                   ./nix/git.nix
                   ./nix/home.nix
                   ./nix/mole.nix
