@@ -67,6 +67,7 @@
                   nixvim.homeModules.nixvim
                   ./nix/home.nix
                   ./nix/nvim.nix
+                  ./nix/tmux.nix
                 ];
               };
             };

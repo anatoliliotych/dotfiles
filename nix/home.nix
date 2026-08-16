@@ -192,7 +192,6 @@ in
 
   home.file.".config/oh-my-zsh/themes/onehalfdark.zsh-theme".source =
     "${dotfiles}/configs/onehalfdark.zsh-theme";
-  home.file.".tmux.conf".source = "${dotfiles}/configs/.tmux.conf";
   home.file.".aerospace.toml".source = "${dotfiles}/configs/.aerospace.toml";
   home.file.".wezterm.lua".source = "${dotfiles}/configs/.wezterm.lua";
   home.file."AGENTS.md".source = "${dotfiles}/AGENTS.md";

@@ -49,10 +49,11 @@ the given file args to the formatter, so the paths must be explicit).
 - `flake.nix` - inputs (nixpkgs, home-manager, nixvim, nix-darwin) and the "stardusty" configuration (named after the machine hostname)
 - `nix/home.nix` - packages, zsh, git, bat, fzf, launchd agents, dotfile links
 - `nix/nvim.nix` - the entire nvim configuration (nixvim)
+- `nix/tmux.nix` - tmux config with the onehalf theme (declarative plugins via home-manager)
 - `nix/darwin.nix` - system config: Touch ID sudo, weekly store maintenance
 - `nix/opensuperwhisper.nix` - OpenSuperWhisper.app package
 - `nix/mole.nix` - mole CLI package (tw93/mole, source-built; bump the version + hashes to update)
-- `configs/` - dotfiles (`.tmux.conf`, `.aerospace.toml`, `.wezterm.lua`, `onehalfdark.zsh-theme`) linked into `~` via home-manager
+- `configs/` - dotfiles (`.aerospace.toml`, `.wezterm.lua`, `onehalfdark.zsh-theme`) linked into `~` via home-manager
 
 Note: the nix daemon and `/etc/nix/nix.conf` are managed by the Determinate
 installer, not nix-darwin; store gc/optimise run as plain launchd daemons
