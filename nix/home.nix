@@ -201,14 +201,6 @@ in
     };
   };
 
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      theme = "OneHalfDark";
-    };
-  };
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };
