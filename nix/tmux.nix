@@ -64,7 +64,15 @@ in
       tmux-onehalf
       pkgs.tmuxPlugins.cpu
       pkgs.tmuxPlugins.yank
-      pkgs.tmuxPlugins.resurrect
+      {
+        plugin = pkgs.tmuxPlugins.resurrect;
+        extraConfig = ''
+          # Plain-tap save/restore: C-s does not chord on the Corne's
+          # home-row mods, and chords after a prefix are slow anyway.
+          set -g @resurrect-save 's'
+          set -g @resurrect-restore 'r'
+        '';
+      }
       pkgs.tmuxPlugins.continuum
       {
         plugin = pkgs.tmuxPlugins.tmux-thumbs;
@@ -74,7 +82,13 @@ in
           set -g @thumbs-key g
         '';
       }
-      pkgs.tmuxPlugins.tmux-fzf
+      {
+        plugin = pkgs.tmuxPlugins.tmux-fzf;
+        extraConfig = ''
+          # Launch on plain f (Shift+F is a cross-hand chord on the Corne)
+          set-environment -g TMUX_FZF_LAUNCH_KEY f
+        '';
+      }
       pkgs.tmuxPlugins.fzf-tmux-url
       {
         plugin = tmux-which-key;
@@ -117,7 +131,7 @@ in
       set-window-option -g mode-keys vi
 
       # Configuration reload
-      bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
+      bind a source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
 
       # Clear screen and history
       bind-key -n C-k send-keys 'clear' Enter \; clear-history
@@ -125,9 +139,11 @@ in
       # Window management
       bind t new-window -c "#{pane_current_path}"
 
-      # Pane splitting (intuitive keys)
-      bind | split-window -h -c "#{pane_current_path}"
-      bind - split-window -v -c "#{pane_current_path}"
+      # Pane splitting (plain taps; % and " are 400ms symbol holds on the Corne)
+      bind v split-window -h -c "#{pane_current_path}"
+      bind b split-window -v -c "#{pane_current_path}"
+      unbind %
+      unbind '"'
 
       # Pane navigation (vim-like)
       bind h select-pane -L
@@ -135,14 +151,17 @@ in
       bind k select-pane -U
       bind l select-pane -R
 
-      # Pane synchronization
-      bind e setw synchronize-panes on
-      bind E setw synchronize-panes off
+      # Pane synchronization (toggle)
+      bind e setw synchronize-panes
 
-      # Rebind prefix
+      # Drop uppercase defaults (shift chords do not fit the Corne)
+      unbind D
+      unbind M
+
+      # Rebind prefix to C-Space (hold A + tap Space, one hand)
       unbind C-b
-      set-option -g prefix C-a
-      bind-key C-a send-prefix
+      set-option -g prefix C-Space
+      bind-key C-Space send-prefix
     '';
   };
 }
