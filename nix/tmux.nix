@@ -20,6 +20,39 @@ let
       platforms = pkgs.lib.platforms.unix;
     };
   };
+
+  tmux-which-key = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-which-key";
+    version = "unstable-2026-08-17";
+    rtpFilePath = "wrapper.sh";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "alexwforsythe";
+      repo = "tmux-which-key";
+      rev = "85fb9756447b989f3b94e515d1e6ee7fec76cba2";
+      hash = "sha256-eEFe85W/byPtxiRhdAaT22fEFNKsi5AEKsYAuDYcTCo=";
+    };
+
+    # plugin.sh.tmux uses GNU realpath --relative-to, which macOS lacks.
+    # This wrapper puts nixpkgs coreutils first in PATH for the plugin
+    # script only (upstream's documented workaround, adapted from tpm
+    # to home-manager's direct run-shell).
+    postInstall = ''
+      cat > "$out/share/tmux-plugins/tmux-which-key/wrapper.sh" <<'EOF'
+      #!/usr/bin/env sh
+      export PATH="${pkgs.coreutils}/bin:$PATH"
+      exec "$(dirname "$0")/plugin.sh.tmux"
+      EOF
+      chmod +x "$out/share/tmux-plugins/tmux-which-key/wrapper.sh"
+    '';
+
+    meta = {
+      description = "Tmux plugin that displays a customizable popup menu of keybindings";
+      homepage = "https://github.com/alexwforsythe/tmux-which-key";
+      license = pkgs.lib.licenses.mit;
+      platforms = pkgs.lib.platforms.unix;
+    };
+  };
 in
 {
   programs.tmux = {
@@ -33,10 +66,25 @@ in
       pkgs.tmuxPlugins.yank
       pkgs.tmuxPlugins.resurrect
       pkgs.tmuxPlugins.continuum
-      pkgs.tmuxPlugins.tmux-thumbs
+      {
+        plugin = pkgs.tmuxPlugins.tmux-thumbs;
+        extraConfig = ''
+          # which-key owns prefix + Space; thumbs moves to prefix + g
+          # (home row, free in the prefix table).
+          set -g @thumbs-key g
+        '';
+      }
       pkgs.tmuxPlugins.tmux-fzf
       pkgs.tmuxPlugins.fzf-tmux-url
-      pkgs.tmuxPlugins.tmux-which-key
+      {
+        plugin = tmux-which-key;
+        extraConfig = ''
+          # Keep config in writable XDG dirs (its store dir is read-only)
+          # and skip the python menu rebuild.
+          set -g @tmux-which-key-xdg-enable 1
+          set -g @tmux-which-key-disable-autobuild 1
+        '';
+      }
     ];
     extraConfig = ''
       # Auto-restore saved sessions when tmux starts (continuum + resurrect)
