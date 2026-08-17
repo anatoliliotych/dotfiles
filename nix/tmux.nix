@@ -36,6 +36,7 @@ in
       pkgs.tmuxPlugins.tmux-thumbs
       pkgs.tmuxPlugins.tmux-fzf
       pkgs.tmuxPlugins.fzf-tmux-url
+      pkgs.tmuxPlugins.tmux-which-key
     ];
     extraConfig = ''
       # Auto-restore saved sessions when tmux starts (continuum + resurrect)
