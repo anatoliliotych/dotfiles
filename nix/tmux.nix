@@ -30,8 +30,17 @@ in
     plugins = [
       tmux-onehalf
       pkgs.tmuxPlugins.cpu
+      pkgs.tmuxPlugins.yank
+      pkgs.tmuxPlugins.resurrect
+      pkgs.tmuxPlugins.continuum
+      pkgs.tmuxPlugins.tmux-thumbs
+      pkgs.tmuxPlugins.tmux-fzf
+      pkgs.tmuxPlugins.fzf-tmux-url
     ];
     extraConfig = ''
+      # Auto-restore saved sessions when tmux starts (continuum + resurrect)
+      set -g @continuum-restore 'on'
+
       # Enable 256 colors
       set -as terminal-features ",xterm-256color:RGB"
 
