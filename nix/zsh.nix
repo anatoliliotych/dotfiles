@@ -40,8 +40,19 @@
 
   programs.zsh = {
     initContent = ''
-      if token="$(op read 'op://Personal/DeepSeek API/credential' 2>/dev/null)"; then
+      _token_cache="$HOME/.cache/anthropic-token"
+      _token_ttl=86400
+      if [[ -f "$_token_cache" ]] && (( $(($(date +%s) - $(stat -f %m "$_token_cache"))) < _token_ttl )); then
+        # Fresh cache: no 1Password round trip (and no approval) per shell.
+        export ANTHROPIC_AUTH_TOKEN="$(cat "$_token_cache")"
+      elif token="$(op read 'op://Personal/DeepSeek API/credential' 2>/dev/null)"; then
         export ANTHROPIC_AUTH_TOKEN="$token"
+        umask 077
+        mkdir -p "$(dirname "$_token_cache")"
+        printf '%s' "$token" > "$_token_cache"
+      elif [[ -f "$_token_cache" ]]; then
+        # Vault locked: fall back to the stale token instead of failing silently.
+        export ANTHROPIC_AUTH_TOKEN="$(cat "$_token_cache")"
       fi
     '';
     plugins = [
