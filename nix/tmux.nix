@@ -34,9 +34,8 @@ in
       {
         plugin = pkgs.tmuxPlugins.resurrect;
         extraConfig = ''
-          # Plain-tap save/restore: C-s does not chord on the Corne's
-          # home-row mods, and chords after a prefix are slow anyway.
-          set -g @resurrect-save 's'
+          # Save lives on z (s is new-session now); plain-tap keys only.
+          set -g @resurrect-save 'z'
           set -g @resurrect-restore 'r'
         '';
       }
@@ -93,6 +92,9 @@ in
 
       # Window management
       bind t new-window -c "#{pane_current_path}"
+
+      # Session management: plain-tap s, prompts for a name
+      bind s command-prompt -p "new session:" "new-session -s '%%' -c '#{pane_current_path}'"
 
       # Pane splitting (plain taps; % and " are 400ms symbol holds on the Corne)
       bind v split-window -h -c "#{pane_current_path}"
