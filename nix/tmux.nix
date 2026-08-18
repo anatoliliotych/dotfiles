@@ -87,9 +87,6 @@ in
       # Enable vi mode for copy/paste
       set-window-option -g mode-keys vi
 
-      # Configuration reload
-      bind a source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
-
       # Window management
       bind t new-window -c "#{pane_current_path}"
 
