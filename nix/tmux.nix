@@ -108,6 +108,12 @@ in
       # Pane synchronization (toggle)
       bind e setw synchronize-panes
 
+      # Copy/paste on home-row taps (brackets are symbol holds on the Corne)
+      unbind [
+      unbind ]
+      bind c copy-mode
+      bind p paste-buffer -p
+
       # Keybinding discovery: native list-keys popup, always accurate
       # (replaces next-layout, which was the default Space binding)
       bind Space list-keys -N -T prefix
