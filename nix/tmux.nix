@@ -71,6 +71,7 @@ in
       # Pane top border shows each pane's path; the border line has the
       # full pane width (the status bar was too cramped for host:dir).
       # Border text takes the active/inactive border colors from the theme.
+      set -g pane-border-status top
       set -g pane-border-format " #{pane_index}:#{pane_current_path} "
 
       # Status line: session name on the left (after the prefix block),
