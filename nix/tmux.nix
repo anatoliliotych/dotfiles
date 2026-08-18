@@ -91,9 +91,6 @@ in
       # Configuration reload
       bind a source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
 
-      # Clear screen and history
-      bind-key -n C-k send-keys 'clear' Enter \; clear-history
-
       # Window management
       bind t new-window -c "#{pane_current_path}"
 
