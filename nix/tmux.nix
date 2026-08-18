@@ -34,9 +34,10 @@ in
       {
         plugin = pkgs.tmuxPlugins.resurrect;
         extraConfig = ''
-          # Save lives on z (s is new-session now); plain-tap keys only.
-          set -g @resurrect-save 'z'
-          set -g @resurrect-restore 'r'
+          # Save on a, restore on z (prefix+r reloads the config);
+          # plain-tap keys only.
+          set -g @resurrect-save 'a'
+          set -g @resurrect-restore 'z'
         '';
       }
       pkgs.tmuxPlugins.continuum
@@ -86,6 +87,9 @@ in
 
       # Enable vi mode for copy/paste
       set-window-option -g mode-keys vi
+
+      # Configuration reload (conf is nix-managed; reload picks up rebuilds live)
+      bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded..."
 
       # Window management
       bind t new-window -c "#{pane_current_path}"
