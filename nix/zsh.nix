@@ -12,20 +12,13 @@
 
     autoload -U add-zsh-hook
     RED=$FG[168]
-    BLUE=$FG[075]
-    PURPLE=$FG[176]
     WHITE=$FG[188]
     REPO_COLOR=$FG[073]
     GREEN=$FG[114]
 
-    PROMPT='%{$BLUE%}%U%m%u\
-    %{$RED%}›\
-    %{$PURPLE%}%U%~%u\
-    %{$RED%}›\
-    %{$REPO_COLOR%}$(repo_char)\
-    %{$GREEN%}$(git_prompt_info)%f\
-    %{$RED%}›\
-    %{$WHITE%} '
+    # Host and path live in the tmux status line (host:dir on the left);
+    # the prompt keeps only the repo status and git branch.
+    PROMPT='%{$REPO_COLOR%}$(repo_char) %{$GREEN%}$(git_prompt_info)%f %{$RED%}›%{$WHITE%} '
 
     function repo_char {
       git branch >/dev/null 2>/dev/null && echo '±' && return

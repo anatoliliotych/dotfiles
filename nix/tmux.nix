@@ -29,7 +29,6 @@ in
     escapeTime = 0;
     plugins = [
       tmux-onehalf
-      pkgs.tmuxPlugins.cpu
       pkgs.tmuxPlugins.yank
       {
         plugin = pkgs.tmuxPlugins.resurrect;
@@ -68,6 +67,12 @@ in
       set -g status-justify centre
       # Double-line pane borders
       set -g pane-border-lines double
+
+      # Status line: host + active pane dir on the left, session name on the
+      # right. Replaces the theme's cpu/ram right side (cpu plugin removed);
+      # colors are the OneHalf palette.
+      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[bg=#3f4452,fg=#98c379] #{host_short}:#{b:pane_current_path} "
+      set -g status-right "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] #{session_name} "
       # Enable xterm keys
       setw -g xterm-keys on
 
