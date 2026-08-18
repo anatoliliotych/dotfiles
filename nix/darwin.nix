@@ -39,6 +39,12 @@
   # Reattach to the GUI session so Touch ID also works inside tmux
   security.pam.services.sudo_local.reattach = true;
 
+  # Power Nap's maintenance sleep ignores caffeinate and repeatedly sleeps
+  # the machine on AC; nix-darwin has no typed option for it.
+  system.activationScripts.extraActivation.text = ''
+    pmset -a powernap 0
+  '';
+
   system.primaryUser = user;
 
   system.defaults.dock = {
