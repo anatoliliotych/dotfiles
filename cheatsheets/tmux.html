@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>tmux Cheat Sheet</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    color: #111;
+    background: #fff;
+    line-height: 1.45;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  .prefix { font-size: .95rem; color: #444; margin-bottom: 1.75rem; }
+  .prefix strong { color: #111; }
+  h2 {
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin: 1.75rem 0 .5rem;
+    padding-bottom: .3rem;
+    border-bottom: 2px solid #111;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #ddd; }
+  td.keys { white-space: nowrap; font-weight: 600; }
+  .note { color: #555; font-size: .85rem; }
+  .daily {
+    margin-top: 2rem;
+    padding: .9rem 1rem;
+    border: 2px solid #111;
+    border-radius: 4px;
+  }
+  .daily h2 { border: none; margin: 0 0 .4rem; padding: 0; }
+  .daily code { font-size: 1.05rem; }
+  footer { margin-top: 2rem; font-size: .8rem; color: #666; }
+  @media print {
+    body { padding: 0; }
+    tr { break-inside: avoid; }
+    h2 { break-after: avoid; }
+    .daily { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>tmux Cheat Sheet</h1>
+<p class="prefix">prefix = <strong>C-Space</strong> &nbsp;(hold A, tap Space - one hand)</p>
+
+<h2>Windows &amp; sessions</h2>
+<table>
+  <tr><td class="keys">C-Space t</td><td>New window, current dir</td></tr>
+  <tr><td class="keys">C-Space s</td><td>New session (prompts for name)</td></tr>
+  <tr><td class="keys">C-Space 1-9</td><td>Jump to window N</td></tr>
+  <tr><td class="keys">C-Space w</td><td>Switch window / session (tree)</td></tr>
+  <tr><td class="keys">C-Space f</td><td>fzf menu (sessions, windows, panes)</td></tr>
+  <tr><td class="keys">C-Space d</td><td>Detach</td></tr>
+</table>
+
+<h2>Panes</h2>
+<table>
+  <tr><td class="keys">C-Space v</td><td>Split right (side by side)</td></tr>
+  <tr><td class="keys">C-Space b</td><td>Split down (stacked)</td></tr>
+  <tr><td class="keys">C-Space h j k l</td><td>Move between panes (vim)</td></tr>
+  <tr><td class="keys">C-Space x</td><td>Kill pane</td></tr>
+</table>
+
+<h2>Copy &amp; scroll</h2>
+<table>
+  <tr><td class="keys">C-Space c</td><td>Copy mode</td></tr>
+  <tr><td class="keys">C-Space p</td><td>Paste</td></tr>
+  <tr><td class="keys">C-Space g</td><td>Thumbs: grab any text on screen</td></tr>
+</table>
+<p class="note">In copy mode: h j k l scroll, y copy, q quit.</p>
+
+<h2>State</h2>
+<table>
+  <tr><td class="keys">C-Space a</td><td>Save session state (auto-saved every 15 min anyway)</td></tr>
+  <tr><td class="keys">C-Space z</td><td>Restore session state</td></tr>
+  <tr><td class="keys">C-Space r</td><td>Reload config</td></tr>
+  <tr><td class="keys">C-Space Space</td><td>Show every keybinding</td></tr>
+</table>
+
+<div class="daily">
+  <h2>Daily 80%</h2>
+  <code>t &nbsp; s &nbsp; 1-9 &nbsp; v &nbsp; b &nbsp; h j k l &nbsp; x &nbsp; c &nbsp; p</code>
+</div>
+
+<footer>Generated 2026-08-18 from /Users/al/dotfiles/nix/tmux.nix</footer>
+
+</body>
+</html>
