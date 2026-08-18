@@ -27,6 +27,7 @@ in
     terminal = "screen-256color";
     baseIndex = 1;
     escapeTime = 0;
+    mouse = true;
     plugins = [
       tmux-onehalf
       pkgs.tmuxPlugins.yank
