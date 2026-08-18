@@ -68,11 +68,16 @@ in
       # Double-line pane borders
       set -g pane-border-lines double
 
-      # Status line: host + active pane dir on the left, session name on the
-      # right. Replaces the theme's cpu/ram right side (cpu plugin removed);
-      # colors are the OneHalf palette.
-      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[bg=#3f4452,fg=#98c379] #{host_short}:#{b:pane_current_path} "
-      set -g status-right "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] #{session_name} "
+      # Pane top border shows each pane's path; the border line has the
+      # full pane width (the status bar was too cramped for host:dir).
+      # Border text takes the active/inactive border colors from the theme.
+      set -g pane-border-format " #{pane_index}:#{pane_current_path} "
+
+      # Status line: session name on the left (after the prefix block),
+      # host on the right; replaces the theme's cpu/ram right side
+      # (cpu plugin removed).
+      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[bg=#3f4452,fg=#98c379] #{session_name} "
+      set -g status-right "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] #{host_short} "
       # Enable xterm keys
       setw -g xterm-keys on
 
