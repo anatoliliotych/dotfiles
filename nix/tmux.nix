@@ -75,9 +75,10 @@ in
 
       # Status line: session name on the left (after the prefix block),
       # host on the right; replaces the theme's cpu/ram right side
-      # (cpu plugin removed).
-      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[bg=#3f4452,fg=#98c379] #{session_name} "
-      set -g status-right "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] #{host_short} "
+      # (cpu plugin removed). No custom colors: the prefix block keeps
+      # the theme's own styling, session/host render in default colors.
+      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[default] #{session_name}"
+      set -g status-right " #{host_short} "
       # Enable xterm keys
       setw -g xterm-keys on
 
