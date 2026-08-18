@@ -66,6 +66,8 @@ in
       set -as terminal-features ",xterm-256color:RGB"
 
       set -g status-justify centre
+      # Double-line pane borders
+      set -g pane-border-lines double
       # Enable xterm keys
       setw -g xterm-keys on
 
