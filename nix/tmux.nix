@@ -72,7 +72,7 @@ in
       # full pane width (the status bar was too cramped for host:dir).
       # Border text takes the active/inactive border colors from the theme.
       set -g pane-border-status top
-      set -g pane-border-format " #{pane_index}:#{pane_current_path} "
+      set -g pane-border-format " #{pane_current_path} "
 
       # Status line: session name on the left (after the prefix block),
       # host on the right; replaces the theme's cpu/ram right side
