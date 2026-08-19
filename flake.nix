@@ -73,6 +73,7 @@
                   ./nix/mole.nix
                   ./nix/nvim.nix
                   ./nix/opensuperwhisper.nix
+                  ./nix/orca.nix
                   ./nix/services.nix
                   ./nix/tmux.nix
                   ./nix/wezterm.nix

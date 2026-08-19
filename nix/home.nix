@@ -22,7 +22,6 @@
     htop
     llm-agents.claude-code
     llama-cpp
-    orca-slicer
     ripgrep
     (python313.withPackages (
       ps: with ps; [
