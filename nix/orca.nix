@@ -17,7 +17,15 @@ let
 
     sourceRoot = "OrcaSlicer.app";
 
-    nativeBuildInputs = [ pkgs.undmg ];
+    # The DMG is APFS; undmg only supports HFS, so mount it natively.
+    unpackPhase = ''
+      runHook preUnpack
+      mkdir -p "$TMPDIR/orca_mount"
+      hdiutil attach "$src" -mountpoint "$TMPDIR/orca_mount" -nobrowse -readonly -quiet
+      cp -R "$TMPDIR/orca_mount/OrcaSlicer.app" .
+      hdiutil detach "$TMPDIR/orca_mount" -quiet
+      runHook postUnpack
+    '';
 
     dontStrip = true;
 
