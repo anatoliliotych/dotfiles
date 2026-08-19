@@ -43,7 +43,19 @@
     plugins = {
       airline.enable = true;
       gitsigns.enable = true;
-      fzf-lua.enable = true;
+      fzf-lua = {
+        enable = true;
+        # Match the pre-nixvim fzf_layout window (0.95 in .vimrc history):
+        # a centered floating window occupying 95% of the editor.
+        settings = {
+          winopts = {
+            width = 0.95;
+            height = 0.95;
+            row = 0.5;
+            col = 0.5;
+          };
+        };
+      };
       treesitter = {
         enable = true;
         settings = {
