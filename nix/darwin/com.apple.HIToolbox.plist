@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppleEnabledInputSources</key>
+	<array>
+		<dict>
+			<key>InputSourceKind</key>
+			<string>Keyboard Layout</string>
+			<key>KeyboardLayout ID</key>
+			<integer>0</integer>
+			<key>KeyboardLayout Name</key>
+			<string>U.S.</string>
+		</dict>
+		<dict>
+			<key>Bundle ID</key>
+			<string>com.apple.CharacterPaletteIM</string>
+			<key>InputSourceKind</key>
+			<string>Non Keyboard Input Method</string>
+		</dict>
+		<dict>
+			<key>Bundle ID</key>
+			<string>com.apple.PressAndHold</string>
+			<key>InputSourceKind</key>
+			<string>Non Keyboard Input Method</string>
+		</dict>
+		<dict>
+			<key>InputSourceKind</key>
+			<string>Keyboard Layout</string>
+			<key>KeyboardLayout ID</key>
+			<integer>19456</integer>
+			<key>KeyboardLayout Name</key>
+			<string>Russian</string>
+		</dict>
+		<dict>
+			<key>Bundle ID</key>
+			<string>com.apple.inputmethod.ironwood</string>
+			<key>InputSourceKind</key>
+			<string>Non Keyboard Input Method</string>
+		</dict>
+	</array>
+</dict>
+</plist>

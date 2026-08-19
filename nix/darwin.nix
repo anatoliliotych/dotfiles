@@ -43,6 +43,14 @@
   # the machine on AC; nix-darwin has no typed option for it.
   system.activationScripts.extraActivation.text = ''
     pmset -a powernap 0
+    # macOS keyboard layer: custom symbolic hotkeys (Ctrl+U previous input
+    # source, Cmd+F10 minimize, unbound space-moves), US+Russian input
+    # sources, and per-keyboard CapsLock-as-Globe mappings.
+    defaults import com.apple.symbolichotkeys ${./darwin/com.apple.symbolichotkeys.plist}
+    defaults import com.apple.HIToolbox ${./darwin/com.apple.HIToolbox.plist}
+    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.0-0-0" -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer><key>HIDKeyboardModifierMappingDst</key><integer>1095216660483</integer></dict>'
+    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.4176-1031-0" -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer><key>HIDKeyboardModifierMappingDst</key><integer>30064771072</integer></dict>'
+    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.7504-24926-0" -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer><key>HIDKeyboardModifierMappingDst</key><integer>1095216660483</integer></dict>'
   '';
 
   system.primaryUser = user;
