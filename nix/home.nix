@@ -18,16 +18,10 @@
     eza
     fzf
     gh
-    nodejs
     htop
     llm-agents.claude-code
     llama-cpp
     ripgrep
-    (python313.withPackages (
-      ps: with ps; [
-        httpx
-      ]
-    ))
     tmux
     tree-sitter
     tuicr
