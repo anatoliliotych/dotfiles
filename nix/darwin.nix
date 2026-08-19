@@ -40,18 +40,11 @@
   security.pam.services.sudo_local.reattach = true;
 
   # Power Nap's maintenance sleep ignores caffeinate and repeatedly sleeps
-  # the machine on AC; nix-darwin has no typed option for it.
+  # the machine on AC; nix-darwin has no typed option for it.  -c scopes
+  # to charger only; || true guards the whole activation (set -e) against
+  # pmset failing on hardware that lacks the powernap key.
   system.activationScripts.extraActivation.text = ''
-    pmset -a powernap 0
-    # macOS keyboard layer: custom symbolic hotkeys (Ctrl+U previous input
-    # source, Cmd+F10 minimize, unbound space-moves), US+Russian input
-    # sources, and per-keyboard CapsLock-as-Globe mappings.
-    defaults import com.apple.symbolichotkeys ${./darwin/com.apple.symbolichotkeys.plist}
-    defaults import com.apple.HIToolbox ${./darwin/com.apple.HIToolbox.plist}
-    # CapsLock acts as the Globe key on every keyboard (global HID mapping;
-    # no per-keyboard vendor/product entries needed).
-    defaults -currentHost write -g HIDKeyboardModifierMappingSrc -array 30064771129
-    defaults -currentHost write -g HIDKeyboardModifierMappingDst -array 1095216660483
+    pmset -c powernap 0 || true
   '';
 
   system.primaryUser = user;
