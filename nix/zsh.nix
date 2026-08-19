@@ -59,6 +59,12 @@
     autosuggestion = {
       enable = true;
     };
+    history = {
+      # Holds the merged multi-year history (20k+ lines imported from
+      # Downloads/.zsh_history); default 10000 would trim it.
+      size = 50000;
+      save = 50000;
+    };
     syntaxHighlighting = {
       enable = true;
     };
