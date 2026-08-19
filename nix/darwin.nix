@@ -48,9 +48,10 @@
     # sources, and per-keyboard CapsLock-as-Globe mappings.
     defaults import com.apple.symbolichotkeys ${./darwin/com.apple.symbolichotkeys.plist}
     defaults import com.apple.HIToolbox ${./darwin/com.apple.HIToolbox.plist}
-    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.0-0-0" -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer><key>HIDKeyboardModifierMappingDst</key><integer>1095216660483</integer></dict>'
-    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.4176-1031-0" -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer><key>HIDKeyboardModifierMappingDst</key><integer>30064771072</integer></dict>'
-    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.7504-24926-0" -array '<dict><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer><key>HIDKeyboardModifierMappingDst</key><integer>1095216660483</integer></dict>'
+    # CapsLock acts as the Globe key on every keyboard (global HID mapping;
+    # no per-keyboard vendor/product entries needed).
+    defaults -currentHost write -g HIDKeyboardModifierMappingSrc -array 30064771129
+    defaults -currentHost write -g HIDKeyboardModifierMappingDst -array 1095216660483
   '';
 
   system.primaryUser = user;
