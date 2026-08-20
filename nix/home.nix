@@ -19,6 +19,7 @@
     fzf
     gh
     htop
+    jq
     llm-agents.claude-code
     llama-cpp
     ripgrep
