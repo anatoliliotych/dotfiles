@@ -70,7 +70,6 @@
                   ./nix/aerospace.nix
                   ./nix/git.nix
                   ./nix/home.nix
-                  ./nix/keyboard.nix
                   ./nix/mole.nix
                   ./nix/nvim.nix
                   ./nix/opensuperwhisper.nix
