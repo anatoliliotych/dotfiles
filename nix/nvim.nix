@@ -54,6 +54,13 @@
             row = 0.5;
             col = 0.5;
           };
+          git = {
+            diff = {
+              # Pre-nixvim preview, with the {1} placeholder renamed to
+              # the current {file} form.
+              preview = "git diff --color=always {file} | less -R";
+            };
+          };
         };
       };
       treesitter = {
@@ -85,8 +92,36 @@
           };
         };
       };
-      indent-blankline.enable = true;
-      which-key.enable = true;
+      indent-blankline = {
+        enable = true;
+        settings = {
+          scope = {
+            enabled = false;
+          };
+        };
+      };
+      which-key = {
+        enable = true;
+        # Pre-nixvim setup: single-line border, all default presets,
+        # 500ms popup delay.
+        settings = {
+          win = {
+            border = "single";
+          };
+          plugins = {
+            presets = {
+              operators = true;
+              motions = true;
+              text_objects = true;
+              windows = true;
+              nav = true;
+              z = true;
+              g = true;
+            };
+          };
+          delay = 500;
+        };
+      };
       fugitive.enable = true;
     };
 
