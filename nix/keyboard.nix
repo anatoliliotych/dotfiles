@@ -5,21 +5,19 @@
 }:
 
 {
-  # User-preference defaults run in the user's context: the darwin
-  # activation script executes as root with HOME=/var/root, so bare
-  # `defaults` calls there would write root's preferences.  Home-manager
-  # activation runs as the user with the right HOME.
+  # CapsLock acts as the Globe key on every keyboard (global HID mapping;
+  # no per-keyboard vendor/product entries needed).  This runs in
+  # home-manager activation because it targets the ByHost global domain
+  # (-currentHost -g), which has no nix-darwin typed option, and the
+  # darwin activation runs as root with HOME=/var/root while HM runs as
+  # the user.  The values are HID usage codes: 30064771129 = 0x700000039
+  # (CapsLock), 1095216660483 = 0xFF00000003 (Globe).  A per-keyboard
+  # mapping configured via System Settings coexists and maps the same
+  # pair, so there is no conflict.
   #
-  # Keyboard layer: Option+Space selects the previous input source
-  # (macOS default), space-move hotkeys stay at their defaults, Cmd+F10
-  # minimizes; US+Russian input sources come from the HIToolbox plist.
-  # CapsLock acts as the Globe key on every keyboard (global HID
-  # mapping; no per-keyboard vendor/product entries needed).  A
-  # per-keyboard mapping configured via System Settings coexists with
-  # it and maps the same pair, so there is no conflict.
+  # Symbolic hotkeys and input sources live in darwin.nix as
+  # system.defaults.CustomUserPreferences.
   home.activation.keyboardDefaults = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    /usr/bin/defaults import com.apple.symbolichotkeys ${./keyboard/com.apple.symbolichotkeys.plist}
-    /usr/bin/defaults import com.apple.HIToolbox ${./keyboard/com.apple.HIToolbox.plist}
     # -int keeps the elements integers (a bare -array writes strings,
     # which macOS ignores for HID mappings); delete first so repeated
     # activations replace instead of appending.
