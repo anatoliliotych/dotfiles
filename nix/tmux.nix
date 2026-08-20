@@ -100,6 +100,9 @@ in
       # Enable automatic window renaming
       set-window-option -g automatic-rename on
 
+      # Killing a middle window renumbers the rest so there are no gaps
+      set -g renumber-windows on
+
       # Enable vi mode for copy/paste
       set-window-option -g mode-keys vi
 
