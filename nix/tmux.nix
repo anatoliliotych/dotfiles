@@ -54,6 +54,8 @@ in
         extraConfig = ''
           # Launch on plain f (Shift+F is a cross-hand chord on the Corne)
           set-environment -g TMUX_FZF_LAUNCH_KEY f
+          # Popup at 95% like the fzf-lua window in nvim (default 62%x38%)
+          set-environment -g TMUX_FZF_OPTIONS "-p -w 95% -h 95% -m"
         '';
       }
       pkgs.tmuxPlugins.fzf-tmux-url
