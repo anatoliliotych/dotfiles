@@ -23,6 +23,7 @@
     llm-agents.claude-code
     llama-cpp
     ripgrep
+    rtk
     tmux
     tree-sitter
     tuicr
@@ -46,4 +47,7 @@
   };
 
   home.file."AGENTS.md".source = "${dotfiles}/AGENTS.md";
+  # Claude Code loads ~/.claude/CLAUDE.md as global instructions; link it
+  # to the same AGENTS.md so both stay in sync.
+  home.file.".claude/CLAUDE.md".source = "${dotfiles}/AGENTS.md";
 }

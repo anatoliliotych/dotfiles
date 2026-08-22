@@ -21,6 +21,11 @@ Nix-managed macOS setup: nix-darwin (system) + home-manager (user) + nixvim (nvi
    ```
    nix run "github:LnL7/nix-darwin/nix-darwin-26.05#darwin-rebuild" -- switch --flake ~/dotfiles#stardusty
    ```
+6. Set up rtk for Claude Code - installs the PreToolUse hook that routes
+   Bash calls through the token-saving proxy, then restart Claude Code:
+   ```
+   rtk init -g
+   ```
 
 The bootstrap command follows the nix-darwin release branch and never needs
 updating; the system it activates is fully pinned by `flake.lock`.

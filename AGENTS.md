@@ -8,3 +8,5 @@ When end-to-end testing a product, be picky about the UI you see and be obsessed
 Apply that same high standard to engineering excellence: lint, test failures, and test flakiness. If you see one, even if it is not caused by what you are working on right now, still get it fixed.
 Before using "dynamic workflows", "ultra code" or any harness feature that immediately spawns a large swarm of subagents, always explain the tradeoffs and ask the user for explicit approval.
 Use worktree when explicitly asked
+
+@RTK.md
