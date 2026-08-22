@@ -62,18 +62,75 @@
   <tr><td class="keys">Space fr</td><td>Resume last search</td></tr>
 </table>
 
+<h2>FzfLua window</h2>
+<table>
+  <tr><td class="keys">Enter</td><td>Open selection</td></tr>
+  <tr><td class="keys">C-s C-v C-t</td><td>Open in split / vsplit / tab</td></tr>
+  <tr><td class="keys">C-z / M-Esc</td><td>Abort / hide</td></tr>
+  <tr><td class="keys">C-f C-b</td><td>Half page down / up</td></tr>
+  <tr><td class="keys">C-a C-e</td><td>Line start / end</td></tr>
+  <tr><td class="keys">alt-g / alt-G</td><td>First / last item</td></tr>
+  <tr><td class="keys">alt-a</td><td>Toggle select all</td></tr>
+  <tr><td class="keys">F1 / F2</td><td>Help / fullscreen</td></tr>
+  <tr><td class="keys">F4 / F3</td><td>Toggle preview / wrap</td></tr>
+  <tr><td class="keys">S-up S-down</td><td>Preview page up / down</td></tr>
+  <tr><td class="keys">alt-q / alt-Q</td><td>Selections to quickfix / loclist</td></tr>
+  <tr><td class="keys">alt-i h f</td><td>Toggle ignore / hidden / follow</td></tr>
+</table>
+
 <h2>Git (fugitive)</h2>
 <table>
   <tr><td class="keys">Space gg</td><td>Status window (vertical)</td></tr>
   <tr><td class="keys">Space gb</td><td>Blame current file</td></tr>
 </table>
-<p class="note">In the status window: o open file (vertical, right), x discard change, s stage / u unstage, = toggle inline diff, cc commit, q close.</p>
+
+<h2>Fugitive status window</h2>
+<table>
+  <tr><td class="keys">o</td><td>Open file, vertical split to the right</td></tr>
+  <tr><td class="keys">s / u / U</td><td>Stage / unstage / unstage all</td></tr>
+  <tr><td class="keys">x</td><td>Discard change</td></tr>
+  <tr><td class="keys">=</td><td>Toggle inline diff</td></tr>
+  <tr><td class="keys">dd / dv</td><td>Diff split (horizontal / vertical)</td></tr>
+  <tr><td class="keys">cc / cw / ca</td><td>Commit / reword / amend</td></tr>
+  <tr><td class="keys">( )</td><td>Jump previous / next file</td></tr>
+  <tr><td class="keys">P</td><td>Preview file</td></tr>
+  <tr><td class="keys">q</td><td>Close status window</td></tr>
+</table>
+
+<h2>Fugitive log window</h2>
+<table>
+  <tr><td class="keys">coo</td><td>Check out commit</td></tr>
+  <tr><td class="keys">crc</td><td>Revert commit</td></tr>
+  <tr><td class="keys">cf / cF</td><td>Fixup! commit / + rebase</td></tr>
+  <tr><td class="keys">czz / czp</td><td>Stash push / pop</td></tr>
+  <tr><td class="keys">ri / rr</td><td>Interactive rebase / continue</td></tr>
+  <tr><td class="keys">ra / re</td><td>Abort rebase / edit todo</td></tr>
+  <tr><td class="keys">rm / rd</td><td>Rebase reword / drop</td></tr>
+</table>
+<p class="note">g? in any fugitive window shows the full map help.</p>
 
 <h2>netrw</h2>
 <table>
-  <tr><td class="keys">o</td><td>Open file in vertical split, right of netrw</td></tr>
+  <tr><td class="keys">o</td><td>Open file, vertical split to the right</td></tr>
+  <tr><td class="keys">Enter</td><td>Browse / open</td></tr>
+  <tr><td class="keys">-</td><td>Parent directory</td></tr>
+  <tr><td class="keys">d / %</td><td>New directory / file</td></tr>
+  <tr><td class="keys">D / R</td><td>Delete / rename</td></tr>
+  <tr><td class="keys">s</td><td>Sort by (name, time, size)</td></tr>
+  <tr><td class="keys">gh</td><td>Toggle hidden files</td></tr>
+  <tr><td class="keys">p / P</td><td>Preview / open in previous window</td></tr>
+  <tr><td class="keys">t</td><td>Open in new tab</td></tr>
+  <tr><td class="keys">qf</td><td>File size and mtime</td></tr>
 </table>
 <p class="note">Configured: no banner, 40-wide split, opens vertical.</p>
+
+<h2>llama (FIM)</h2>
+<table>
+  <tr><td class="keys">C-F</td><td>Trigger completion (insert mode)</td></tr>
+  <tr><td class="keys">Tab</td><td>Accept full suggestion</td></tr>
+  <tr><td class="keys">S-Tab</td><td>Accept line</td></tr>
+  <tr><td class="keys">C-B</td><td>Accept word</td></tr>
+</table>
 
 <footer>Generated 2026-08-22</footer>
 
