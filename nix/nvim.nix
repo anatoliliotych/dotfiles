@@ -16,6 +16,15 @@
       netrw_banner = 0;
       netrw_browse_split = 2;
       netrw_winsize = 40;
+      # llama.vim FIM keys: plain Ctrl chords (leader chords and S-Tab
+      # do not fit insert mode on the Corne; the plugin merges these
+      # over its defaults).  C-l/C-b are unbound in insert mode.  The
+      # trigger is disabled: auto_fim already fires completions.
+      llama_config = {
+        keymap_fim_trigger = "";
+        keymap_fim_accept_line = "<C-l>";
+        keymap_fim_accept_word = "<C-b>";
+      };
     };
 
     opts = {
