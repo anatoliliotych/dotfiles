@@ -79,6 +79,8 @@ in
       # host on the right; replaces the theme's cpu/ram right side
       # (cpu plugin removed). No custom colors: the prefix block keeps
       # the theme's own styling, session/host render in default colors.
+      # status-left-length defaults to 10 and strips long session names.
+      set -g status-left-length 40
       set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[default] #{session_name}"
       set -g status-right " #{host_short} "
       # Enable xterm keys
