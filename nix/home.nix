@@ -15,6 +15,7 @@
   home.packages = with pkgs; [
     _1password-cli
     autojump
+    devenv
     eza
     fzf
     gh
