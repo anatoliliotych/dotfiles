@@ -280,6 +280,22 @@
           desc = "FzfLua Resume";
         };
       }
+      {
+        mode = "n";
+        key = "<leader>gg";
+        action = "<cmd>vertical Git<CR>";
+        options = {
+          desc = "Fugitive Status";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>gb";
+        action = "<cmd>G blame<CR>";
+        options = {
+          desc = "Fugitive Blame";
+        };
+      }
     ];
 
     extraConfigLua = ''
@@ -306,6 +322,25 @@
         pattern = '*',
         callback = function()
           vim.opt_local.formatoptions:remove({'c', 'r', 'o'})
+        end,
+      })
+
+      -- In fugitive buffers, `o` opens the file under the cursor in a
+      -- vertical split to the right of the status window (gO) instead of
+      -- a horizontal one.  Applies to status, log, and commit buffers.
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'fugitive',
+        callback = function(ev)
+          vim.keymap.set('n', 'o', function()
+            -- gO vsplits the status window; without splitright the file
+            -- lands on its left, squeezing status into the middle.
+            local old = vim.o.splitright
+            vim.o.splitright = true
+            vim.cmd('normal gO')
+            vim.o.splitright = old
+          end, { buffer = ev.buf, desc = 'Open in vertical split' })
+          -- x discards the change under the cursor like X, without shift.
+          vim.keymap.set('n', 'x', 'X', { buffer = ev.buf, remap = true, desc = 'Discard change' })
         end,
       })
 
