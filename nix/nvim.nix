@@ -344,6 +344,25 @@
         end,
       })
 
+      -- In netrw, `o` splits horizontally and ignores netrw_browse_split.
+      -- Route it through the <CR> handler instead, which honors
+      -- netrw_browse_split=2, and flip splitright so the file window
+      -- opens to the right of the netrw window.
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'netrw',
+        callback = function(ev)
+          vim.keymap.set('n', 'o', function()
+            local old = vim.o.splitright
+            vim.o.splitright = true
+            vim.api.nvim_feedkeys(
+              vim.api.nvim_replace_termcodes('<Plug>NetrwLocalBrowseCheck', true, true, true),
+              'xt', false
+            )
+            vim.o.splitright = old
+          end, { buffer = ev.buf, desc = 'Open file in vertical split to the right' })
+        end,
+      })
+
       vim.api.nvim_create_autocmd('BufWritePre', {
         pattern = '*',
         callback = function()
