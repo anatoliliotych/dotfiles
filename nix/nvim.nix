@@ -218,30 +218,6 @@
       }
       {
         mode = "n";
-        key = "<leader>t";
-        action = {
-          __raw = "function() vim.cmd('vsplit | terminal') end";
-        };
-        options = {
-          desc = "Open terminal in vertical split";
-          noremap = true;
-          silent = true;
-        };
-      }
-      {
-        mode = "n";
-        key = "<leader>T";
-        action = {
-          __raw = "function() vim.cmd('tabnew | terminal') end";
-        };
-        options = {
-          desc = "Open terminal in new tab";
-          noremap = true;
-          silent = true;
-        };
-      }
-      {
-        mode = "n";
         key = "<leader>ff";
         action = {
           __raw = "function() require('fzf-lua').files() end";
