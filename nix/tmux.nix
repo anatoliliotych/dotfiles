@@ -22,6 +22,8 @@ let
   };
 in
 {
+  services.tmux-agent-notifier.enable = true;
+
   programs.tmux = {
     enable = true;
     terminal = "screen-256color";
@@ -82,8 +84,10 @@ in
       # (cpu plugin removed). No custom colors: the prefix block keeps
       # the theme's own styling, session/host render in default colors.
       # status-left-length defaults to 10 and strips long session names.
+      # The agent-notifier badge shows next to the session name when an
+      # agent session waits for input (prefix+i opens the jump popup).
       set -g status-left-length 40
-      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[default] #{session_name}"
+      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[default]#{E:@agent-notifier-badge} #{session_name}"
       set -g status-right " #{host_short} "
       # Enable xterm keys
       setw -g xterm-keys on

@@ -233,6 +233,7 @@
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
+        "tmux-agent-notifier": "tmux-agent-notifier",
         "tuicr": "tuicr"
       }
     },
@@ -296,6 +297,26 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "tmux-agent-notifier": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787483552,
+        "narHash": "sha256-LKFLLvuKmj8mcUiEd8d5J02npDuieF+P7T4a/UtN5qg=",
+        "path": "/Users/al/Projects/tmux-agent-notifier",
+        "type": "path"
+      },
+      "original": {
+        "path": "/Users/al/Projects/tmux-agent-notifier",
+        "type": "path"
       }
     },
     "treefmt-nix": {

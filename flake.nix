@@ -23,6 +23,11 @@
       url = "github:agavra/tuicr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tmux-agent-notifier = {
+      url = "path:/Users/al/Projects/tmux-agent-notifier";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
@@ -34,6 +39,7 @@
       nixvim,
       nix-darwin,
       tuicr,
+      tmux-agent-notifier,
       ...
     }:
     let
@@ -67,6 +73,7 @@
               users.${user} = {
                 imports = [
                   nixvim.homeModules.nixvim
+                  tmux-agent-notifier.homeManagerModules.default
                   ./nix/aerospace.nix
                   ./nix/git.nix
                   ./nix/home.nix
