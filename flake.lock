@@ -309,8 +309,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1787483552,
-        "narHash": "sha256-LKFLLvuKmj8mcUiEd8d5J02npDuieF+P7T4a/UtN5qg=",
+        "lastModified": 1787506487,
+        "narHash": "sha256-ZLaP3OFfu2Pc/2CT/JrbaLro+I2eq8iXBxV99+7Zl2s=",
         "path": "/Users/al/Projects/tmux-agent-notifier",
         "type": "path"
       },
