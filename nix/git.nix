@@ -11,6 +11,9 @@
       "**/.claude/settings.local.json"
     ];
     settings = {
+      init = {
+        defaultBranch = "main";
+      };
       user = {
         name = gitName;
         email = gitEmail;
