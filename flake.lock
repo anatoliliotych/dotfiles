@@ -309,11 +309,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787562087,
-        "narHash": "sha256-hUL4XXpbes0uTFA5iJHDTRbI1kImI7CceRVSPwmcqeY=",
+        "lastModified": 1787563908,
+        "narHash": "sha256-TjjloWrjtI+dJl9z1/QXslK8OGvRMfU1SIFaYHxPqM8=",
         "owner": "anatoliliotych",
         "repo": "tmux-agent-notifier",
-        "rev": "1cbd8c5a96ffe87eaf7d8eebb1470490acb9d708",
+        "rev": "3007c516a8a08ec53fe266395909dbe84a55d6c2",
         "type": "github"
       },
       "original": {
