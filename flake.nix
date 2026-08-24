@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     tmux-agent-notifier = {
-      url = "path:/Users/al/Projects/tmux-agent-notifier";
+      url = "github:anatoliliotych/tmux-agent-notifier";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };

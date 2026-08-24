@@ -309,14 +309,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1787526431,
-        "narHash": "sha256-/RI9JA16HG8ETUynkz7vTFDE7EQKe+fEyN2VUktHvbU=",
-        "path": "/Users/al/Projects/tmux-agent-notifier",
-        "type": "path"
+        "lastModified": 1787562087,
+        "narHash": "sha256-hUL4XXpbes0uTFA5iJHDTRbI1kImI7CceRVSPwmcqeY=",
+        "owner": "anatoliliotych",
+        "repo": "tmux-agent-notifier",
+        "rev": "1cbd8c5a96ffe87eaf7d8eebb1470490acb9d708",
+        "type": "github"
       },
       "original": {
-        "path": "/Users/al/Projects/tmux-agent-notifier",
-        "type": "path"
+        "owner": "anatoliliotych",
+        "repo": "tmux-agent-notifier",
+        "type": "github"
       }
     },
     "treefmt-nix": {
