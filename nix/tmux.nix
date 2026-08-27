@@ -148,6 +148,12 @@ in
       # (replaces next-layout, which was the default Space binding)
       bind Space list-keys -N -T prefix
 
+      # Dropdown zsh popup: floating overlay at 85% of the screen, opens
+      # in the pane's working dir (fresh shell each time). Esc closes it;
+      # no -E on purpose - tmux 3.6 hardcodes Esc/C-c as popup dismiss
+      # keys, which also means vi-mode's Esc never reaches the popup shell.
+      bind u display-popup -d "#{pane_current_path}" -w 85% -h 85%
+
       # Drop uppercase defaults (shift chords do not fit the Corne)
       unbind D
       unbind M
