@@ -65,7 +65,7 @@
 
     shellAliases = {
       vim = "nvim";
-      ls = "eza --icons --group-directories-first";
+      ls = "eza -a --icons --group-directories-first";
     };
 
     # fzf-tab colors: OneHalfDark, reusing the exact hex values already
