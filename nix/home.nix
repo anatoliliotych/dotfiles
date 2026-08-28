@@ -48,6 +48,11 @@
     settings = {
       auto_sync = false; # no sync, ever - local history only
       update_check = false; # nix manages versions
+      invert = true; # search prompt at top instead of bottom
+      show_help = true; # show keybinding help line
+      auto_hide_height = 0; # never hide the help/tabs row in compact mode
+      theme.name = "marine"; # default theme's hint-row color (dark grey) is
+      # unreadable on dark backgrounds; marine uses steelblue instead
     };
   };
 
