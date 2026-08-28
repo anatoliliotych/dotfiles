@@ -43,6 +43,14 @@
     };
   };
 
+  programs.atuin = {
+    enable = true;
+    settings = {
+      auto_sync = false; # no sync, ever - local history only
+      update_check = false; # nix manages versions
+    };
+  };
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
