@@ -67,5 +67,13 @@
       vim = "nvim";
       ls = "eza --icons --group-directories-first";
     };
+
+    # fzf-tab colors: OneHalfDark, reusing the exact hex values already
+    # verified for atuin/nvim (home.nix, nvim.nix WhichKey) rather than
+    # guessing a fresh palette. Fields with no verified match (bg, marker,
+    # spinner, border) are left out and fall back to fzf's own defaults.
+    initContent = ''
+      zstyle ':fzf-tab:*' fzf-flags '--color=fg:#dcdfe4,fg+:#dcdfe4,bg+:#353b45,hl:#e5c07b,hl+:#e5c07b,info:#919baa,prompt:#61afef,pointer:#e06c75,header:#5c6370'
+    '';
   };
 }
