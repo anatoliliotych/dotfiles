@@ -51,10 +51,29 @@
       invert = true; # search prompt at top instead of bottom
       show_help = true; # show keybinding help line
       auto_hide_height = 0; # never hide the help/tabs row in compact mode
-      theme.name = "marine"; # default theme's hint-row color (dark grey) is
-      # unreadable on dark backgrounds; marine uses steelblue instead
+      theme.name = "onehalf"; # default theme's hint-row color (dark grey) is
+      # unreadable on dark backgrounds; see themes/onehalf.toml below
     };
   };
+
+  # OneHalfDark colors for atuin, matching bat/nvim/tmux/wezterm/zsh (exact
+  # hex values from sonph/onehalf's own vim colorscheme, not guessed).
+  # Only Meanings that exist in the pinned atuin version (18.15.2) are set
+  # here - it predates the Syntax* meanings, and an unknown key fails the
+  # whole theme's deserialization, silently dropping atuin to unstyled.
+  home.file.".config/atuin/themes/onehalf.toml".text = ''
+    [theme]
+    name = "onehalf"
+
+    [colors]
+    AlertError = "#e06c75"
+    AlertWarn = "#e5c07b"
+    AlertInfo = "#61afef"
+    Annotation = "#5c6370"
+    Guidance = "#61afef"
+    Important = "#dcdfe4"
+    Muted = "#919baa"
+  '';
 
   home.sessionVariables = {
     EDITOR = "nvim";
