@@ -159,7 +159,13 @@
           delay = 500;
         };
       };
-      fugitive.enable = true;
+      lazygit = {
+        enable = true;
+        settings = {
+          # 0.95 to match the fzf-lua window and the tmux-fzf popup.
+          floating_window_scaling_factor = 0.95;
+        };
+      };
     };
 
     keymaps = [
@@ -245,15 +251,6 @@
         };
       }
       {
-        mode = "t";
-        key = "<Esc>";
-        action = "<C-\\><C-n>";
-        options = {
-          noremap = true;
-          silent = true;
-        };
-      }
-      {
         mode = "n";
         key = "<leader>ff";
         action = {
@@ -296,17 +293,21 @@
       {
         mode = "n";
         key = "<leader>gg";
-        action = "<cmd>vertical Git<CR>";
+        action = "<cmd>LazyGit<CR>";
         options = {
-          desc = "Fugitive Status";
+          desc = "LazyGit";
         };
       }
       {
+        # lazygit has no blame view; gitsigns (already enabled) provides
+        # the closest equivalent to the old :G blame.
         mode = "n";
         key = "<leader>gb";
-        action = "<cmd>G blame<CR>";
+        action = {
+          __raw = "function() require('gitsigns').blame_line({ full = true }) end";
+        };
         options = {
-          desc = "Fugitive Blame";
+          desc = "Gitsigns Blame Line";
         };
       }
     ];
@@ -320,25 +321,6 @@
         pattern = '*',
         callback = function()
           vim.opt_local.formatoptions:remove({'c', 'r', 'o'})
-        end,
-      })
-
-      -- In fugitive buffers, `o` opens the file under the cursor in a
-      -- vertical split to the right of the status window (gO) instead of
-      -- a horizontal one.  Applies to status, log, and commit buffers.
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'fugitive',
-        callback = function(ev)
-          vim.keymap.set('n', 'o', function()
-            -- gO vsplits the status window; without splitright the file
-            -- lands on its left, squeezing status into the middle.
-            local old = vim.o.splitright
-            vim.o.splitright = true
-            vim.cmd('normal gO')
-            vim.o.splitright = old
-          end, { buffer = ev.buf, desc = 'Open in vertical split' })
-          -- x discards the change under the cursor like X, without shift.
-          vim.keymap.set('n', 'x', 'X', { buffer = ev.buf, remap = true, desc = 'Discard change' })
         end,
       })
 
@@ -372,13 +354,6 @@
         pattern = '*',
         callback = function()
           vim.opt_local.eol = false
-        end,
-      })
-
-      vim.api.nvim_create_autocmd('BufWinEnter', {
-        pattern = '*',
-        callback = function()
-          vim.fn.matchadd('ErrorMsg', '\\%>80v.\\+', -1)
         end,
       })
 
