@@ -89,7 +89,15 @@
           set-environment -g TMUX_FZF_OPTIONS "-p -w 95% -h 95% -m"
         '';
       }
-      pkgs.tmuxPlugins.fzf-tmux-url
+      {
+        plugin = pkgs.tmuxPlugins.fzf-tmux-url;
+        extraConfig = ''
+          # Defaults to u, which the zsh popup binding below overrides
+          # (extraConfig is sourced after the plugins), leaving the URL
+          # picker unreachable. o is a free plain-tap key.
+          set -g @fzf-url-bind 'o'
+        '';
+      }
     ];
     extraConfig = ''
       # Auto-restore saved sessions when tmux starts (continuum + resurrect)
