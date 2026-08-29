@@ -7,9 +7,20 @@
     nixpkgs.source = pkgs.path;
 
     extraPlugins = [
-      pkgs.vimPlugins.onehalf
       pkgs.vimPlugins.llama-vim
     ];
+
+    colorschemes.catppuccin = {
+      enable = true;
+      settings = {
+        flavour = "frappe";
+        integrations = {
+          gitsigns = true;
+          which_key = true;
+          indent_blankline = true;
+        };
+      };
+    };
 
     globals = {
       mapleader = " ";
@@ -50,7 +61,24 @@
     };
 
     plugins = {
-      airline.enable = true;
+      lualine = {
+        enable = true;
+        settings = {
+          options.theme = "catppuccin-nvim";
+          sections = {
+            # Drop the fileformat icon (renders as a penguin glyph for
+            # unix line endings) and the diff git-changes counter.
+            lualine_b = [
+              "branch"
+              "diagnostics"
+            ];
+            lualine_x = [
+              "encoding"
+              "filetype"
+            ];
+          };
+        };
+      };
       gitsigns.enable = true;
       fzf-lua = {
         enable = true;
@@ -284,22 +312,7 @@
     ];
 
     extraConfigLua = ''
-      vim.cmd('colorscheme onehalfdark')
       vim.cmd([[highlight default link SignColumn LineNr]])
-      vim.g.airline_theme = 'onehalfdark'
-
-      local function set_whichkey_highlights()
-        vim.cmd [[
-          highlight WhichKeyNormal guibg=#353b45 guifg=#dcdfe4
-          highlight WhichKeyFloat  guibg=#353b45 guifg=#dcdfe4
-          highlight WhichKeyBorder guibg=#353b45 guifg=#61afef
-        ]]
-      end
-      set_whichkey_highlights()
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "*",
-        callback = set_whichkey_highlights,
-      })
 
       vim.o.path = vim.o.path .. '**'
 

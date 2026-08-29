@@ -1,26 +1,5 @@
 { pkgs, ... }:
 
-let
-  tmux-onehalf = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-onehalf-theme";
-    version = "unstable-2026-08-16";
-    rtpFilePath = "main.tmux";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "andersondanilo";
-      repo = "tmux-onehalf-theme";
-      rev = "1a099d775c948bc1b72c16c05aca5fb2f1bd3c03";
-      hash = "sha256-ExUJc14niGSNzqX3e1GjxZMv0y4gLmzfoQG0hzRFI5s=";
-    };
-
-    meta = {
-      description = "OneHalf color theme for tmux (dark variant)";
-      homepage = "https://github.com/andersondanilo/tmux-onehalf-theme";
-      license = pkgs.lib.licenses.mit;
-      platforms = pkgs.lib.platforms.unix;
-    };
-  };
-in
 {
   services.tmux-agent-notifier.enable = true;
 
@@ -31,7 +10,57 @@ in
     escapeTime = 0;
     mouse = true;
     plugins = [
-      tmux-onehalf
+      {
+        plugin = pkgs.tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavor "frappe"
+          # No half-circle powerline cap on the left edge of each module.
+          set -g @catppuccin_status_left_separator ""
+          set -g @catppuccin_host_icon ""
+
+          # Left side reads "# <badge> <session>". The "#" sits in the
+          # module's icon slot. "##" is the tmux escape for a literal "#"
+          # - it collapses once during #{E:} expansion.
+          set -g @catppuccin_session_icon "##"
+          # Drop the icon's accent chip so the "#" shares the session
+          # name's background, and drive its foreground off the prefix
+          # state instead: mauve while C-Space is held, normal otherwise.
+          # Both are set before the plugin loads, and it only fills these
+          # in when unset, so these win.
+          set -g @catppuccin_status_session_icon_bg "#{E:@catppuccin_status_module_text_bg}"
+          set -g @catppuccin_status_session_icon_fg "#{?client_prefix,#{E:@thm_mauve},#{E:@thm_fg}}"
+          # Badge in @thm_mauve, the same accent the theme gives the
+          # active window, so it stands out against the module background.
+          set -g @catppuccin_session_text "#[fg=#{@thm_mauve}]#{E:@agent-notifier-badge}#[fg=#{@thm_fg}] #S"
+
+          # Windows: one flat chip per window, no separately colored
+          # number block. The plugin hardcodes the number segment's
+          # foreground to @thm_crust, which is unreadable on these
+          # backgrounds, so the number moves into the text segment and
+          # the number segment is left empty.
+          # "custom" is used purely so the separators below survive - the
+          # built-in styles overwrite them unconditionally.
+          set -g @catppuccin_window_status_style "custom"
+          set -g @catppuccin_window_left_separator ""
+          set -g @catppuccin_window_middle_separator ""
+          set -g @catppuccin_window_right_separator ""
+          set -g @catppuccin_window_number ""
+          set -g @catppuccin_window_current_number ""
+          # #W (window name, tracked by automatic-rename) - not #T, which
+          # is the pane title and defaults to the hostname, and which
+          # programs like claude overwrite with their own status text.
+          set -g @catppuccin_window_text " #I #W "
+          set -g @catppuccin_window_current_text " #I #W "
+          # No activity/bell/zoom flag glyphs appended to the name.
+          set -g @catppuccin_window_flags "none"
+          # Active window sits on the current background; the rest blend
+          # into the status line's own (darker) background.
+          set -g @catppuccin_window_current_number_color "#{@thm_surface_1}"
+          set -g @catppuccin_window_current_text_color "#{@thm_surface_1}"
+          set -g @catppuccin_window_number_color "#{@thm_mantle}"
+          set -g @catppuccin_window_text_color "#{@thm_mantle}"
+        '';
+      }
       pkgs.tmuxPlugins.yank
       {
         plugin = pkgs.tmuxPlugins.resurrect;
@@ -79,16 +108,18 @@ in
       set -g pane-border-status top
       set -g pane-border-format " #{pane_current_path} "
 
-      # Status line: session name on the left (after the prefix block),
-      # host on the right; replaces the theme's cpu/ram right side
-      # (cpu plugin removed). No custom colors: the prefix block keeps
-      # the theme's own styling, session/host render in default colors.
+      # Status line: session module on the left (built-in catppuccin
+      # module - turns red while the prefix is held, green otherwise),
+      # host module on the right; replaces the theme's cpu/ram right side
+      # (cpu plugin removed). No colors of our own: both modules are
+      # rendered entirely by the catppuccin plugin from @catppuccin_flavor.
       # status-left-length defaults to 10 and strips long session names.
-      # The agent-notifier badge shows next to the session name when an
+      # The agent-notifier badge shows next to the session module when an
       # agent session waits for input (prefix+i opens the jump popup).
       set -g status-left-length 40
-      set -g status-left "#{?client_prefix,#[bg=#5da5e1],#[bg=#5d677a]}#[fg=#2a2f39] # #[default]#{E:@agent-notifier-badge} #{session_name}"
-      set -g status-right " #{host_short} "
+      set -g status-left "#{E:@catppuccin_status_session}"
+      set -g status-right-length 40
+      set -g status-right "#{E:@catppuccin_status_host}"
       # Enable xterm keys
       setw -g xterm-keys on
 

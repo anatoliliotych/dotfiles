@@ -55,7 +55,7 @@ the given file args to the formatter, so the paths must be explicit).
 - `nix/home.nix` - packages, zsh, git, bat, fzf, launchd agents, dotfile links
 - `nix/nvim.nix` - the entire nvim configuration (nixvim)
 - `nix/aerospace.nix` - AeroSpace config (TOML-serialized settings + module-managed launchd agent)
-- `nix/tmux.nix` - tmux config with the onehalf theme (declarative plugins via home-manager)
+- `nix/tmux.nix` - tmux config with the Catppuccin Frappe theme (declarative plugins via home-manager)
 - `nix/wezterm.nix` - WezTerm config (lua via programs.wezterm)
 - `nix/darwin.nix` - system config: Touch ID sudo, weekly store maintenance
 - `nix/opensuperwhisper.nix` - OpenSuperWhisper.app package

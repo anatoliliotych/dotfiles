@@ -39,9 +39,17 @@
   programs.bat = {
     enable = true;
     config = {
-      theme = "OneHalfDark";
+      theme = "Catppuccin Frappe";
     };
   };
+
+  home.file.".config/bat/themes/Catppuccin Frappe.tmTheme".source =
+    "${pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "bat";
+      rev = "6810349b28055dce54076712fc05fc68da4b8ec0";
+      hash = "sha256-lJapSgRVENTrbmpVyn+UQabC9fpV1G1e+CdlJ090uvg=";
+    }}/themes/Catppuccin Frappe.tmTheme";
 
   programs.atuin = {
     enable = true;
@@ -51,28 +59,32 @@
       invert = true; # search prompt at top instead of bottom
       show_help = true; # show keybinding help line
       auto_hide_height = 0; # never hide the help/tabs row in compact mode
-      theme.name = "onehalf"; # default theme's hint-row color (dark grey) is
-      # unreadable on dark backgrounds; see themes/onehalf.toml below
+      theme.name = "catppuccin-frappe-blue"; # default theme's hint-row color
+      # (dark grey) is unreadable on dark backgrounds; see the theme file
+      # below - blue accent, matching the blue accent used across
+      # tmux/nvim/fzf-tab
     };
   };
 
-  # OneHalfDark colors for atuin, matching bat/nvim/tmux/wezterm/zsh (exact
-  # hex values from sonph/onehalf's own vim colorscheme, not guessed).
-  # Only Meanings that exist in the pinned atuin version (18.15.2) are set
-  # here - it predates the Syntax* meanings, and an unknown key fails the
-  # whole theme's deserialization, silently dropping atuin to unstyled.
-  home.file.".config/atuin/themes/onehalf.toml".text = ''
+  # Catppuccin Frappe (blue accent) for atuin, from catppuccin/atuin's own
+  # theme (exact hex values, not guessed), trimmed to the Meanings that
+  # exist in the pinned atuin version (18.15.2) - it predates the Syntax*
+  # meanings, and an unknown key fails the whole theme's deserialization,
+  # silently dropping atuin to unstyled.
+  home.file.".config/atuin/themes/catppuccin-frappe-blue.toml".text = ''
     [theme]
-    name = "onehalf"
+    name = "catppuccin-frappe-blue"
 
     [colors]
-    AlertError = "#e06c75"
-    AlertWarn = "#e5c07b"
-    AlertInfo = "#61afef"
-    Annotation = "#5c6370"
-    Guidance = "#61afef"
-    Important = "#dcdfe4"
-    Muted = "#919baa"
+    AlertInfo = "#a6d189"
+    AlertWarn = "#ef9f76"
+    AlertError = "#e78284"
+    Annotation = "#8caaee"
+    Base = "#c6d0f5"
+    Guidance = "#949cbb"
+    Important = "#e78284"
+    Title = "#8caaee"
+    Muted = "#737994"
   '';
 
   home.sessionVariables = {

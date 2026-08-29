@@ -5,7 +5,7 @@
     enable = true;
     extraConfig = ''
       return {
-        color_scheme = 'OneHalfDark',
+        color_scheme = 'Catppuccin Frappe',
         scrollback_lines = 50000,
         font_size = 22,
         window_decorations = 'RESIZE',
