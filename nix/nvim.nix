@@ -374,6 +374,28 @@
           desc = "Gitsigns Blame Line";
         };
       }
+      {
+        # Walk the working-tree diff without leaving the buffer. nav_hunk
+        # honors 'wrapscan', so past the last hunk it cycles to the first.
+        mode = "n";
+        key = "<leader>gn";
+        action = {
+          __raw = "function() require('gitsigns').nav_hunk('next') end";
+        };
+        options = {
+          desc = "Gitsigns Next Hunk";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>gp";
+        action = {
+          __raw = "function() require('gitsigns').nav_hunk('prev') end";
+        };
+        options = {
+          desc = "Gitsigns Previous Hunk";
+        };
+      }
     ];
 
     extraConfigLua = ''
