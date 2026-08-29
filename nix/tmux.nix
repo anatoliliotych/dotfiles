@@ -146,6 +146,12 @@
 
       # Enable automatic window renaming
       set-window-option -g automatic-rename on
+      # Nix's makeWrapper leaves the real binary as ".<name>-wrapped" and
+      # tmux names the window after the executable, not argv[0] - so claude
+      # shows up as ".claude-wrapped". Strip the wrapper decoration back to
+      # the plain name. Otherwise this is tmux's stock format.
+      set -g automatic-rename-format \
+        '#{?pane_in_mode,[tmux],#{s/^\.(.*)-wrapped$/\1/:pane_current_command}}#{?pane_dead,[dead],}'
 
       # Killing a middle window renumbers the rest so there are no gaps
       set -g renumber-windows on
