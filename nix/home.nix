@@ -91,8 +91,11 @@
   # name it - no palette to vendor. Setting `theme` explicitly (rather than
   # theme_dark/theme_light) pins the flavour and makes `appearance` inert,
   # matching the fixed-dark Frappe used by tmux/nvim/bat/atuin.
+  # tuicr also self-updates its own binary, which would fight the pinned
+  # flake input; nix manages the version, same as atuin above.
   home.file.".config/tuicr/config.toml".text = ''
     theme = "catppuccin-frappe"
+    no_update_check = true
   '';
 
   home.sessionVariables = {
