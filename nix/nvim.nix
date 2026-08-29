@@ -18,6 +18,7 @@
           gitsigns = true;
           which_key = true;
           indent_blankline = true;
+          flash = true;
         };
         # The default ColorColumn (surface0) is nearly invisible against
         # the editor background; @red is the palette's warning accent and
@@ -172,6 +173,21 @@
           delay = 500;
         };
       };
+      # Enabling flash already upgrades f/F/t/T with jump labels; the
+      # jump keymaps below are the parts it leaves to the user.
+      flash = {
+        enable = true;
+        settings = {
+          # Labels on / and ? too. Off upstream because it is meant to be
+          # toggled with <C-s>, which is a same-hand home-row chord that
+          # does not fire on the Corne, so it is enabled outright instead.
+          modes.search.enabled = true;
+          # Labels on f/F/t/T as well, so any match is one keypress away
+          # instead of repeating the motion. flash keeps hjkliardc out of
+          # the label pool, so d/c/i/a still work right after the motion.
+          modes.char.jump_labels = true;
+        };
+      };
       lazygit = {
         enable = true;
         settings = {
@@ -301,6 +317,41 @@
         };
         options = {
           desc = "FzfLua Resume";
+        };
+      }
+      # flash.nvim.  Upstream uses S and <C-s>, both of which are
+      # same-hand home-row chords that do not fire on the Corne, so
+      # treesitter select moves to <leader>s (Space is a thumb) and the
+      # search toggle is left out.  o-mode r does not clash with normal
+      # mode r (replace char).
+      {
+        mode = [ "n" "x" "o" ];
+        key = "s";
+        action = {
+          __raw = "function() require('flash').jump() end";
+        };
+        options = {
+          desc = "Flash Jump";
+        };
+      }
+      {
+        mode = [ "n" "x" "o" ];
+        key = "<leader>s";
+        action = {
+          __raw = "function() require('flash').treesitter() end";
+        };
+        options = {
+          desc = "Flash Treesitter Select";
+        };
+      }
+      {
+        mode = "o";
+        key = "r";
+        action = {
+          __raw = "function() require('flash').remote() end";
+        };
+        options = {
+          desc = "Flash Remote";
         };
       }
       {

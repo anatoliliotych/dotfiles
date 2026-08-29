@@ -54,6 +54,18 @@
   <tr><td class="keys">C-=</td><td>Equalize all splits</td></tr>
 </table>
 
+<h2>flash (jump)</h2>
+<table>
+  <tr><td class="keys">s</td><td>Jump: type 2 chars, then the label</td></tr>
+  <tr><td class="keys">Space s</td><td>Select treesitter node (repeat to grow)</td></tr>
+  <tr><td class="keys">r</td><td>Remote jump, operator-pending (e.g. <em>yr</em>)</td></tr>
+  <tr><td class="keys">f F t T</td><td>Search past the current line; matches get labels</td></tr>
+  <tr><td class="keys">f / F</td><td>After f{char}: next / previous match (clever-f)</td></tr>
+  <tr><td class="keys">; ,</td><td>Next / previous match</td></tr>
+  <tr><td class="keys">/ ?</td><td>Search, with jump labels</td></tr>
+</table>
+<p class="note">Works in normal, visual and operator-pending modes. Esc cancels.</p>
+
 <h2>FzfLua</h2>
 <table>
   <tr><td class="keys">Space ff</td><td>Files</td></tr>
