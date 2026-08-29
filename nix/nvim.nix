@@ -19,6 +19,19 @@
           which_key = true;
           indent_blankline = true;
         };
+        # The default ColorColumn (surface0) is nearly invisible against
+        # the editor background; @red is the palette's warning accent and
+        # matches what the old over-length highlight used. Named palette
+        # colors, so this still follows the flavour.
+        custom_highlights = {
+          __raw = ''
+            function(colors)
+              return {
+                ColorColumn = { bg = colors.red },
+              }
+            end
+          '';
+        };
       };
     };
 
@@ -340,6 +353,21 @@
             )
             vim.o.splitright = old
           end, { buffer = ev.buf, desc = 'Open file in vertical split to the right' })
+        end,
+      })
+
+      -- Guide line at column 120, file buffers only.  colorcolumn is
+      -- window-local, so this also clears the line again for anything
+      -- that is not editable code.  A non-empty buftype covers terminals
+      -- (lazygit) and help; netrw needs the filetype check because it
+      -- leaves buftype empty, and FileType is in the event list because
+      -- netrw only sets its filetype after BufWinEnter has fired.
+      local nocolumn = { netrw = true }
+      vim.api.nvim_create_autocmd({'BufWinEnter', 'TermOpen', 'FileType'}, {
+        pattern = '*',
+        callback = function()
+          local ok = vim.bo.buftype == "" and not nocolumn[vim.bo.filetype]
+          vim.wo.colorcolumn = ok and "120" or ""
         end,
       })
 
