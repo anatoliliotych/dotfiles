@@ -87,6 +87,14 @@
     Muted = "#737994"
   '';
 
+  # tuicr ships catppuccin-frappe as a bundled theme, so this only needs to
+  # name it - no palette to vendor. Setting `theme` explicitly (rather than
+  # theme_dark/theme_light) pins the flavour and makes `appearance` inert,
+  # matching the fixed-dark Frappe used by tmux/nvim/bat/atuin.
+  home.file.".config/tuicr/config.toml".text = ''
+    theme = "catppuccin-frappe"
+  '';
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
