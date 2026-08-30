@@ -76,8 +76,6 @@
     ShowStatusBar = true;
   };
 
-  services.tailscale.enable = true;
-
   users.users.${user}.home = "/Users/${user}";
 
   environment.systemPackages = [
