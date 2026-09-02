@@ -71,6 +71,14 @@
       foldmethod = "indent";
       writebackup = false;
       swapfile = false;
+      # Persistent undo: keep the history in nvim's state dir (the
+      # nvim default location) so it survives closing a buffer.
+      undofile = true;
+      undodir = {
+        __raw = ''vim.fn.stdpath("state") .. "/undo"'';
+      };
+      # Reclaim the command line row; messages still show on demand.
+      cmdheight = 0;
       clipboard = "unnamedplus,unnamed";
     };
 
