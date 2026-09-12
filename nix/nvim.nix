@@ -371,16 +371,6 @@
         };
       }
       {
-        mode = "n";
-        key = "<leader>gw";
-        action = {
-          __raw = "function() require('fzf-lua').git_worktrees() end";
-        };
-        options = {
-          desc = "Git Worktrees";
-        };
-      }
-      {
         # lazygit has no blame view; gitsigns (already enabled) provides
         # the closest equivalent to the old :G blame.
         mode = "n";
@@ -482,6 +472,29 @@
           vim.bo.filetype = 'slim'
         end,
       })
+
+      -- lazygit chdir's itself when you switch worktree or repo, and on
+      -- quit (`q`; `Q` skips it) writes that directory to
+      -- $LAZYGIT_NEW_DIR_FILE.  Nothing reads it by default, so the
+      -- switch is lost when the floating terminal closes.  Point it at a
+      -- scratch file and cd there on exit; lazygit's worktrees tab is
+      -- then the only worktree switcher we need.
+      local lazygit_newdir = vim.fn.stdpath('state') .. '/lazygit-newdir'
+      vim.env.LAZYGIT_NEW_DIR_FILE = lazygit_newdir
+      vim.g.lazygit_on_exit_callback = function()
+        local f = io.open(lazygit_newdir, 'r')
+        if not f then return end
+        local dir = vim.trim(f:read('*l') or "")
+        f:close()
+        -- Consume it: lazygit.nvim skips this callback on a non-zero
+        -- exit, and a leftover file would be replayed on the next quit.
+        os.remove(lazygit_newdir)
+        if dir == "" or dir == vim.fn.getcwd() or vim.fn.isdirectory(dir) == 0 then
+          return
+        end
+        vim.cmd('cd ' .. vim.fn.fnameescape(dir))
+        vim.notify("cwd set to '" .. dir .. "'")
+      end
     '';
   };
 }
