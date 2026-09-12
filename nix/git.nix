@@ -9,6 +9,7 @@
     enable = true;
     ignores = [
       "**/.claude/settings.local.json"
+      ".worktrees/"
     ];
     settings = {
       init = {
