@@ -495,6 +495,36 @@
         vim.cmd('cd ' .. vim.fn.fnameescape(dir))
         vim.notify("cwd set to '" .. dir .. "'")
       end
+
+      -- lualine only re-reads the branch on BufEnter, so a cd like the
+      -- one above leaves the old branch sitting on the statusline until
+      -- you happen to switch buffers - exactly the confusion this is
+      -- meant to remove.
+      vim.api.nvim_create_autocmd('DirChanged', {
+        callback = function()
+          pcall(function()
+            require('lualine.components.branch.git_branch').find_git_dir()
+            require('lualine').refresh({ force = true })
+          end)
+        end,
+      })
+
+      -- The other half of that handshake: hand nvim's final cwd back to
+      -- the shell, so quitting nvim after a worktree switch does not drop
+      -- you in the branch you left.  The wrapper in zsh.nix exports
+      -- NVIM_NEW_DIR_FILE; without it we write nothing, so an nvim
+      -- started any other way leaves no stray file behind.
+      vim.api.nvim_create_autocmd('VimLeavePre', {
+        callback = function()
+          local target = vim.env.NVIM_NEW_DIR_FILE
+          if not target or target == "" then return end
+          local f = io.open(target, 'w')
+          if not f then return end
+          -- (-1, -1) is the global cwd, not a tab- or window-local one.
+          f:write(vim.fn.getcwd(-1, -1))
+          f:close()
+        end,
+      })
     '';
   };
 }

@@ -90,6 +90,24 @@
     initContent = ''
       zstyle ':fzf-tab:*' fzf-flags '--color=fg:#C6D0F5,fg+:#C6D0F5,bg+:#414559,hl:#E78284,hl+:#E78284,info:#CA9EE6,prompt:#CA9EE6,pointer:#F2D5CF,header:#E78284'
       source "${config.home.homeDirectory}/.config/zsh/catppuccin_frappe-zsh-syntax-highlighting.zsh"
+
+      # Switching worktree inside nvim (lazygit's worktrees tab) cd's nvim,
+      # but a child cannot move its parent, so nvim writes its final cwd to
+      # NVIM_NEW_DIR_FILE on exit and we follow it here.  Same handshake
+      # lazygit uses with LAZYGIT_NEW_DIR_FILE.  tmux needs nothing extra:
+      # pane_current_path reads the shell's own cwd.  Only interactive
+      # shells get this function, so $EDITOR invocations are unaffected.
+      nvim() {
+        local newdir=''${TMPDIR:-/tmp}/nvim-newdir.$$
+        NVIM_NEW_DIR_FILE=$newdir command nvim "$@"
+        local ret=$?
+        if [[ -f $newdir ]]; then
+          local dir=$(<$newdir)
+          rm -f -- $newdir
+          [[ -d $dir && $dir != $PWD ]] && cd -- $dir
+        fi
+        return $ret
+      }
     '';
   };
 }
