@@ -371,6 +371,16 @@
         };
       }
       {
+        mode = "n";
+        key = "<leader>gw";
+        action = {
+          __raw = "function() require('fzf-lua').git_worktrees() end";
+        };
+        options = {
+          desc = "Git Worktrees";
+        };
+      }
+      {
         # lazygit has no blame view; gitsigns (already enabled) provides
         # the closest equivalent to the old :G blame.
         mode = "n";
